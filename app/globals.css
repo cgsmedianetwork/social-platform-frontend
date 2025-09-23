@@ -7,6 +7,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --font-inter: var(--font-inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -38,6 +39,30 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-base-25: var(--base-25);
+  --color-base-50: var(--base-50);
+  --color-base-100: var(--base-100);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-400: var(--base-400);
+  --color-base-500: var(--base-500);
+  --color-base-600: var(--base-600);
+  --color-base-700: var(--base-700);
+  --color-base-800: var(--base-800);
+  --color-base-900: var(--base-900);
+  --color-base-950: var(--base-950);
+  --color-secondary-25: var(--secondary-25);
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+  --color-secondary-950: var(--secondary-950);
 }
 
 /* Light theme */
@@ -74,6 +99,30 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --base-25: "#F7FDFD";
+  --base-50: "#E5FEFF";
+  --base-100: "#B7FCFF";
+  --base-200: "#89F9FE";
+  --base-300: "#5DF6FE";
+  --base-400: "#2FF4FE";
+  --base-500: "#06F0FE";
+  --base-600: "#01C6D0";
+  --base-700: "#019AA2";
+  --base-800: "#016E73";
+  --base-900: "#004346";
+  --base-950: "#00181A";
+  --secondary-25: "#F7FDFD";
+  --secondary-50: "#E7F3FD";
+  --secondary-100: "#BBDEFA";
+  --secondary-200: "#92C9F7";
+  --secondary-300: "#6AB7F4";
+  --secondary-400: "#2E98EF";
+  --secondary-500: "#128AED";
+  --secondary-600: "#0F72C2";
+  --secondary-700: "#0B5692";
+  --secondary-800: "#08406D";
+  --secondary-900: "#052742";
+  --secondary-950: "#020E18";
 }
 
 @layer base {
