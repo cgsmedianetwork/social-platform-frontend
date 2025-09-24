@@ -19,7 +19,7 @@ const ConnectYoutube = () => {
   return (
     <div className="flex items-center gap-2">
       <span className="cursor-pointer" onClick={onClick}>
-        <YoutubeIcon />
+        <YoutubeIcon className="text-red-500" />
       </span>
       connect youtube
     </div>
