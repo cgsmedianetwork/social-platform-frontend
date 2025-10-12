@@ -26,8 +26,8 @@ const CustomInput = ({
       : setSelectedType("password");
   };
   return (
-    <div className={className}>
-      <label htmlFor={id} className="text-base-500 text-sm font-semibold ">
+    <div className={`${className} flex flex-col gap-1.5`}>
+      <label htmlFor={id} className="text-neutral-600 text-sm font-medium ">
         {label}
         {required && <span className="text-red-600">*</span>}
       </label>
@@ -39,7 +39,7 @@ const CustomInput = ({
           value={value}
           defaultValue={defaultValue}
           placeholder={placeholder}
-          className={`w-full h-auto px-3 py-2.5 text-sm placeholder:text-sm shadow-sm  border outline-none focus:outline-none border-gray-300 rounded-md focus:ring-[3px] focus:ring-brand-50 focus:border-brand-400 transition-all duration-200 ${
+          className={`w-full h-auto px-3 py-2.5 text-sm placeholder:text-sm shadow-xs border outline-none focus:outline-none border-gray-300 rounded-md focus:ring-[4px] focus:ring-brand-50 focus:border-brand-400 transition-all duration-250 ${
             type === "password" && "pr-8"
           } ${inputClass}`}
           {...inputProps}
