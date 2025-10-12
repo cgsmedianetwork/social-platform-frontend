@@ -20,10 +20,7 @@ const CustomCheckbox = ({ id, label, field, className, labelClass }) => {
         </span>
         {label && (
           <span
-            className={cn(
-              "text-sm text-headerColor whitespace-pre-wrap inline-block",
-              labelClass
-            )}
+            className={cn("text-sm text-headerColor  inline-block", labelClass)}
           >
             {label}
           </span>

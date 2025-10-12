@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { SignupSchema } from "@/Schema/SignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -34,14 +35,14 @@ const SignupForms = () => {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className={"flex flex-col gap-1"}>
                 <CustomInput
                   type={"text"}
                   placeholder={"jondoe@gmail.com"}
                   label={"Email"}
                   {...field}
                 />
-                <FormMessage />
+                <FormMessage className={cn("ml-1 text-xs")} />
               </FormItem>
             )}
           />
@@ -49,14 +50,14 @@ const SignupForms = () => {
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className={"flex flex-col gap-1"}>
                 <CustomInput
                   type={"text"}
                   placeholder={"Enter phone number"}
                   label={"Phone number"}
                   {...field}
                 />
-                <FormMessage />
+                <FormMessage className={cn("ml-1 text-xs")} />
               </FormItem>
             )}
           />
@@ -65,14 +66,14 @@ const SignupForms = () => {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className={"flex flex-col gap-1"}>
                 <CustomInput
                   type={"password"}
                   placeholder={"Enter password"}
                   label={"Password"}
                   {...field}
                 />
-                <FormMessage />
+                <FormMessage className={cn("ml-1 text-xs")} />
               </FormItem>
             )}
           />
@@ -82,8 +83,16 @@ const SignupForms = () => {
               control={form.control}
               name="terms"
               render={({ field }) => (
-                <FormItem className="flex gap-1">
+                <FormItem className="flex gap-0.5">
                   <CustomCheckbox id={"terms"} field={field} />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm mt-1 text-neutral-500 flex-1"
+                  >
+                    Please exclude me from any future emails regarding Triosale
+                    and related Intuit product and feature updates, marketing
+                    best practices, and promotions.
+                  </label>
                 </FormItem>
               )}
             />
