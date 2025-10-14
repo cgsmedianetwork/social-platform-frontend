@@ -1,4 +1,4 @@
-import SignupForms from "@/components/Forms/SignupForms";
+import LoginForms from "@/components/Forms/LoginForms";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ const LoginPage = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-transparent to-brand-50"></div>
       </div>
       <div className="w-full flex items-center justify-center">
-        <SignupForms />
+        <LoginForms />
       </div>
     </div>
   );

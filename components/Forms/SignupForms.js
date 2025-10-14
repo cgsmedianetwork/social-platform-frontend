@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { SignupSchema } from "@/Schema/SignupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
@@ -99,10 +100,16 @@ const SignupForms = () => {
           </div>
           <button
             type="submit"
-            className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold"
+            className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold cursor-pointer"
           >
             Register
           </button>
+          <p className="text-sm text-neutral-500 text-center font-semibold">
+            Already have an account?{" "}
+            <Link href="/login" className="text-brand-700">
+              Login
+            </Link>
+          </p>
         </form>
       </Form>
     </div>
