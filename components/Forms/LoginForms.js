@@ -25,13 +25,15 @@ const LoginForms = () => {
   return (
     <div className="max-w-[420px] w-full p-5 bg-neutral-50 rounded-2xl">
       <div className="flex justify-center">
-        <Image
-          src={logo}
-          alt="logo"
-          width={100}
-          height={100}
-          className="w-24"
-        />
+        <Link href={"/"}>
+          <Image
+            src={logo}
+            alt="logo"
+            width={100}
+            height={100}
+            className="w-24"
+          />
+        </Link>
       </div>
       <h1 className="text-3xl font-semibold mt-4">Log in</h1>
       <p className="mt-2 text-neutral-500 text-sm">

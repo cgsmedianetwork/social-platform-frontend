@@ -2,11 +2,12 @@
 import { YoutubeIcon } from "lucide-react";
 
 const ConnectYoutube = () => {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const onClick = async () => {
-    console.log("clicked");
+    // console.log("clicked");
     try {
       const response = await fetch(
-        "http://localhost:4005/api/v1/social-connection/youtube/connect"
+        `${backendUrl}/api/v1/social-connection/youtube/connect`
       );
       const data = await response.json();
       console.log(data);
@@ -17,11 +18,11 @@ const ConnectYoutube = () => {
     }
   };
   return (
-    <div className="flex items-center gap-2">
-      <span className="cursor-pointer" onClick={onClick}>
-        <YoutubeIcon className="text-red-500" />
-      </span>
-      connect youtube
+    <div
+      className="cursor-pointer p-3 border border-slate-600 rounded-md w-fit"
+      onClick={onClick}
+    >
+      <YoutubeIcon className="text-red-500" />
     </div>
   );
 };
