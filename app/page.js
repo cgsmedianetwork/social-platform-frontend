@@ -1,20 +1,18 @@
-import ConnectFacebook from "@/components/ConnectSocialPlatforms/ConnectFacebook";
-import ConnectInstagram from "@/components/ConnectSocialPlatforms/ConnectInstagram";
-import ConnectTiktok from "@/components/ConnectSocialPlatforms/ConnectTiktok";
-import ConnectYoutube from "@/components/ConnectSocialPlatforms/ConnectYoutube";
+import GrowthSection from "@/components/Growth/Growth";
+import TopHero from "@/components/Hero/TopHero";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Home() {
   return (
-    <div className="text-xl font-bold flex w-full h-screen justify-center items-center">
-      <div>
-        <div>Social Platform</div>
-        <div className="flex gap-4 mt-5">
-          <ConnectYoutube />
-          <ConnectFacebook />
-          <ConnectInstagram />
-          <ConnectTiktok />
+    <div className="w-full overflow-x-hidden">
+      <div className="relative w-full">
+        <div className="pt-4 w-full custom-container">
+          <Navbar />
+          <TopHero />
         </div>
+        <div className="absolute top-0 left-1/2 -translate-x-[10%] h-full w-[50%] -rotate-45 bg-blue-400 pointer-events-none rounded-full opacity-40 blur-[80px] -z-30"></div>
       </div>
+      <GrowthSection />
     </div>
   );
 }
