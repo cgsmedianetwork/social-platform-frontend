@@ -1,4 +1,5 @@
 import GrowthSection from "@/components/Growth/Growth";
+import HeroTwo from "@/components/Hero/HeroTwo";
 import TopHero from "@/components/Hero/TopHero";
 import Navbar from "@/components/Navbar/Navbar";
 
@@ -13,6 +14,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-[10%] h-full w-[50%] -rotate-45 bg-blue-400 pointer-events-none rounded-full opacity-40 blur-[80px] -z-30"></div>
       </div>
       <GrowthSection />
+      <HeroTwo />
     </div>
   );
 }
