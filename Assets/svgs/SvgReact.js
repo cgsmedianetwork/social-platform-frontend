@@ -1,11 +1,10 @@
-function ConnectIcon(props) {
+function ConnectIcon({ width = 40, height = 40, ...props }) {
   return (
     <svg
-      width={40}
-      height={40}
+      width={width}
+      height={height}
       viewBox="0 0 40 40"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <g clipPath="url(#clip0_847_1380)">
@@ -37,10 +36,10 @@ function ConnectIcon(props) {
 
 export default ConnectIcon;
 
-export const DashboardIcon = (props) => (
+export const DashboardIcon = ({ width = 40, height = 40, ...props }) => (
   <svg
-    width={40}
-    height={40}
+    width={width}
+    height={height}
     viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -149,10 +148,10 @@ export const DashboardIcon = (props) => (
   </svg>
 );
 
-const GuidanceIcon = (props) => (
+export const GuidanceIcon = ({ width = 40, height = 40, ...props }) => (
   <svg
-    width={39}
-    height={37}
+    width={width}
+    height={height}
     viewBox="0 0 39 37"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
