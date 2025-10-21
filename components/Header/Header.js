@@ -1,8 +1,14 @@
 import { cn } from "@/lib/utils";
 
-const Header = ({ title, description, titleClass, descriptionClass }) => {
+const Header = ({
+  title,
+  description,
+  titleClass,
+  descriptionClass,
+  className,
+}) => {
   return (
-    <header className="flex flex-col gap-2">
+    <header className={cn("flex flex-col gap-2", className)}>
       <h3 className={cn("text-neutral-600 text-5xl font-semibold", titleClass)}>
         {title}
       </h3>
