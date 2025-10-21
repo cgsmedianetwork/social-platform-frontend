@@ -83,7 +83,7 @@ const LoginForms = () => {
                   <CustomCheckbox id={"remember"} field={field} />
                   <label
                     htmlFor="remember"
-                    className="text-sm mt-1 text-neutral-500 flex-1"
+                    className="text-sm mt-1 text-neutral-500 flex-1 cursor-pointer"
                   >
                     Remember me
                   </label>
