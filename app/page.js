@@ -1,3 +1,4 @@
+import FAQ from "@/components/FAQ/FAQ";
 import GrowthSection from "@/components/Growth/Growth";
 import HeroTwo from "@/components/Hero/HeroTwo";
 import TopHero from "@/components/Hero/TopHero";
@@ -22,6 +23,7 @@ export default function Home() {
       <div className="w-full ">
         <Insights />
         <Testimonial />
+        <FAQ />
       </div>
     </>
   );
