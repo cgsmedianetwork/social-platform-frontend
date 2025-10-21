@@ -3,6 +3,7 @@ import HeroTwo from "@/components/Hero/HeroTwo";
 import TopHero from "@/components/Hero/TopHero";
 import Insights from "@/components/Insights/Insights";
 import Navbar from "@/components/Navbar/Navbar";
+import Testimonial from "@/components/Testimonial/Testimonial";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       </div>
       <div className="w-full ">
         <Insights />
+        <Testimonial />
       </div>
     </>
   );
