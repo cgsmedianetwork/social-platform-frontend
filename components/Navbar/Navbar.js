@@ -24,9 +24,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div>
-        <button className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-2 rounded-md flex items-center gap-1">
+        <Link
+          href={"/signup"}
+          className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-2 rounded-md flex items-center gap-1"
+        >
           Sign Up <ArrowRight size={18} />
-        </button>
+        </Link>
       </div>
     </nav>
   );

@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import Header from "../Header/Header";
 import { GridPattern } from "../ui/grid-pattern";
 
 const CallToAction = () => {
   return (
     <section className="pb-28 bg-neutral-50 ">
-      <div className="max-w-3xl mx-auto rounded-2xl p-10 relative ">
+      <div className="max-w-4xl mx-auto rounded-2xl p-12 relative ">
         <GridPattern
           x={-30}
           y={-30}
@@ -17,6 +18,7 @@ const CallToAction = () => {
             [5, 1],
             [10, 3],
             [13, 2],
+            [2, 2],
           ]}
           className={cn(
             "[mask-image:linear-gradient(to_bottom_right,white,transparent)] -z-0"
@@ -29,13 +31,16 @@ const CallToAction = () => {
             "Join a friendly platform where your social growth actually makes sense — and finally starts working."
           }
           className={"relative z-10 ]"}
-          titleClass={"text-center leading-14"}
-          descriptionClass={"text-center max-w-xl mx-auto mt-3"}
+          titleClass={"text-center text-6xl leading-16 max-w-xl mx-auto"}
+          descriptionClass={"text-center text-lg max-w-xl mx-auto mt-3"}
         />
         <div className="flex justify-center">
-          <button className="bg-[#06F0FE] text-sm font-semibold text-neutral-950 px-4 py-3 rounded-md flex items-center gap-1 mt-7 z-30 cursor-pointer">
+          <Link
+            href={"/signup"}
+            className="bg-[#06F0FE] text-sm font-semibold text-neutral-950 px-4 py-3 rounded-md flex items-center gap-1 mt-7 z-30 cursor-pointer"
+          >
             Sign Up <ArrowRight size={18} />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

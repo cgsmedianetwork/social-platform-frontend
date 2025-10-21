@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import heroImage from "../../Assets/images/hero image.png";
 
 const TopHero = () => {
@@ -14,9 +15,14 @@ const TopHero = () => {
           Connect your profiles, track what matters, and get personal advice to
           boost reach, engagement, and followers.
         </p>
-        <button className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-3 rounded-md flex items-center gap-1 mt-7">
-          Try it Free <ArrowRight size={18} />
-        </button>
+        <div className="flex">
+          <Link
+            href={"/signup"}
+            className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-3 rounded-md flex items-center gap-1 mt-7"
+          >
+            Try it Free <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
       <div>
         <Image

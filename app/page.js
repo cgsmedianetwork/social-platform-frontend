@@ -1,5 +1,6 @@
 import CallToAction from "@/components/CallToAction/CallToAction";
 import FAQ from "@/components/FAQ/FAQ";
+import Footer from "@/components/Footer/Footer";
 import GrowthSection from "@/components/Growth/Growth";
 import HeroTwo from "@/components/Hero/HeroTwo";
 import TopHero from "@/components/Hero/TopHero";
@@ -26,6 +27,7 @@ export default function Home() {
         <Testimonial />
         <FAQ />
         <CallToAction />
+        <Footer />
       </div>
     </>
   );
