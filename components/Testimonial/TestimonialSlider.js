@@ -21,7 +21,7 @@ const TestimonialSlider = () => {
       <CarouselContent className={""}>
         {TestimonialData.map((testimonial, index) => (
           <CarouselItem key={index} className={cn(" pb-20")}>
-            <div className="px-12 py-10 relative max-w-2xl mx-auto bg-blue-100 rounded-xl">
+            <div className="px-12 py-10 relative max-w-3xl mx-auto bg-blue-100 rounded-xl">
               <div className="flex flex-col gap-6 pl-28">
                 <h2 className="text-neutral-600 text-3xl font-semibold">
                   {testimonial.name}

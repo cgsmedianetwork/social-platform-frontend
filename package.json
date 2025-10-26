@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "hugeicons-react": "^0.3.0",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.544.0",
     "next": "15.5.3",
     "postcss": "^8.5.6",

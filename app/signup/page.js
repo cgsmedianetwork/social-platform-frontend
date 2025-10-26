@@ -23,7 +23,7 @@ const page = () => {
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent to-brand-50"></div>
-        <div className="flex-1 flex scale-105 z-20 max-w-[600px]">
+        <div className="flex-1 flex scale-105 z-20 max-w-[700px]">
           <div className="w-2/5">
             <Analytics1 />
           </div>

@@ -20,12 +20,13 @@ const FAQ = () => {
           type="single"
           collapsible
           className="w-full flex flex-col gap-0.5 mt-16"
-          defaultValue="item-1"
+          defaultValue="1"
         >
           {AccordionData.map((item) => (
             <AccordionItem
               key={item.id}
               value={item.id}
+              defaultValue="1"
               className={cn("bg-white border-b-0 rounded-2xl px-16 py-8 ")}
             >
               <AccordionTrigger className="hover:no-underline cursor-pointer items-center gap-4">
@@ -39,7 +40,7 @@ const FAQ = () => {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="">
-                <p className="text-lg text-neutral-500 pl-24 pr-10">
+                <p className="text-lg text-neutral-500 pl-28 pr-10">
                   {item.answer}
                 </p>
               </AccordionContent>

@@ -97,7 +97,7 @@ const LoginForms = () => {
 
           <button
             type="submit"
-            className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold cursor-pointer"
+            className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold cursor-pointer"pr-12
           >
             Login
           </button>
