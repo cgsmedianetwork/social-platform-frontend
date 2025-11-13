@@ -35,7 +35,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-center justify-center p-10 px-16">
         <SignupForms />
       </div>
     </div>

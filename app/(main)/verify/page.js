@@ -6,11 +6,12 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { cn } from "@/lib/utils";
+import CountDown from "@/utils/CountDown";
 import { Mail01Icon } from "hugeicons-react";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
 
 const VerifyEmailPage = () => {
+  const [isResend, setIsResend] = useState(false);
   return (
     <section className="relative overflow-hidden w-full min-h-screen flex items-center justify-center">
       <div className="absolute w-56 h-56 top-1/2 left-[30%] -translate-x-1/2 -translate-y-1/2 bg-blue-400 pointer-events-none rounded-full blur-[100px]  opacity-40 z-10"></div>
@@ -41,14 +42,13 @@ const VerifyEmailPage = () => {
         <div>
           <h2 className="text-3xl text-center font-semibold text-neutral-950">
             {" "}
-            Check your email
+            Input the OTP code
           </h2>
           <p className="text-neutral-500 text-center text-sm mt-2">
-            We sent a verification code to your email.
+            We sent a otp to your phone.
           </p>
         </div>
         <div>
-          {/* <CustomInput label={"Email"} placeholder={"Enter your email"} /> */}
           <InputOTP
             maxLength={4}
             onChange={(value) => {
@@ -83,20 +83,28 @@ const VerifyEmailPage = () => {
               />
             </InputOTPGroup>
           </InputOTP>
-          <button className="w-full py-2.5 mt-5 rounded-lg text-sm font-medium bg-brand-500">
-            Verify Email
+          <button
+            type="submit"
+            className="w-full py-2.5 mt-5 rounded-lg text-sm font-medium bg-brand-500 cursor-pointer"
+          >
+            Verify OTP
           </button>
         </div>
         <p className="text-sm text-center">
           Didn&apos;t receive the code?{" "}
-          <span className="text-brand-700">Click to resend</span>
+          {isResend ? (
+            <span className="text-brand-700 cursor-pointer">
+              Click to resend
+            </span>
+          ) : (
+            <CountDown
+              durationInSeconds={5864}
+              onComplete={() => {
+                setIsResend(true);
+              }}
+            />
+          )}
         </p>
-        <Link
-          href={"/login"}
-          className="text-sm flex items-center gap-1 text-neutral-500 mx-auto"
-        >
-          <ArrowLeft size={20} /> Back to login
-        </Link>
       </h1>
     </section>
   );

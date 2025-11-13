@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="py-3 px-4 bg-white rounded-xl flex justify-between items-center">
       <div className="flex items-center gap-8">
         <Image src={logo} alt="logo" className="w-16" />
-        <ul className="flex items-center gap-5">
+        <ul className="flex items-center gap-6">
           <Link href="/" className="text-neutral-500 text-sm">
             Features
           </Link>

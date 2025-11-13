@@ -1,14 +1,20 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { useSignUpInitMutation } from "@/Redux/Features/Auth/AuthApiSlice";
 import { SignupSchema } from "@/Schema/SignupSchema";
+import { session } from "@/utils/SessionHelper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
 import { Form, FormField, FormItem, FormMessage } from "../ui/form";
 
 const SignupForms = () => {
+  const router = useRouter();
+  const [signUpInit, { isLoading }] = useSignUpInitMutation();
   const form = useForm({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
@@ -18,8 +24,20 @@ const SignupForms = () => {
       terms: false,
     },
   });
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const result = await signUpInit(data).unwrap();
+    console.log("result", result);
+    console.log("result?.data?.sendOTP", result?.data?.sendOTP);
+    // set Session
+    if (result?.data?.sendOTP) {
+      // sessionStorage.setItem("signupInit", result?.data?.sessionId);
+      session.set("signupInit", result?.data?.sessionId);
+      toast.success("OTP sent to your phone number!");
+      router.push("/verify");
+    } else {
+      toast.error("Failed to create account. Try again!");
+    }
   };
   return (
     <div className="max-w-[420px]  w-full p-5 bg-neutral-50 rounded-2xl">
@@ -41,6 +59,7 @@ const SignupForms = () => {
                   type={"text"}
                   placeholder={"jondoe@gmail.com"}
                   label={"Email"}
+                  // required={true}
                   {...field}
                 />
                 <FormMessage className={cn("ml-1 text-xs")} />
@@ -56,6 +75,7 @@ const SignupForms = () => {
                   type={"text"}
                   placeholder={"Enter phone number"}
                   label={"Phone number"}
+                  required={true}
                   {...field}
                 />
                 <FormMessage className={cn("ml-1 text-xs")} />

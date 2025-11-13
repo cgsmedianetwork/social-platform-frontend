@@ -44,7 +44,7 @@ const ForgotPasswordPage = () => {
         </div>
         <div>
           <CustomInput label={"Email"} placeholder={"Enter your email"} />
-          <button className="w-full py-2.5 mt-5 rounded-lg text-sm font-medium bg-brand-500">
+          <button className="w-full py-2.5 mt-5 rounded-lg text-sm font-medium bg-brand-500 cursor-pointer">
             Reset Password
           </button>
         </div>
