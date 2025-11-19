@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
 import { Form, FormField, FormItem, FormMessage } from "../ui/form";
+import { Spinner } from "../ui/spinner";
 
 const SignupForms = () => {
   const router = useRouter();
@@ -25,18 +26,24 @@ const SignupForms = () => {
     },
   });
   const onSubmit = async (data) => {
-    console.log(data);
-    const result = await signUpInit(data).unwrap();
-    console.log("result", result);
-    console.log("result?.data?.sendOTP", result?.data?.sendOTP);
-    // set Session
-    if (result?.data?.sendOTP) {
-      // sessionStorage.setItem("signupInit", result?.data?.sessionId);
-      session.set("signupInit", result?.data?.sessionId);
-      toast.success("OTP sent to your phone number!");
-      router.push("/verify");
-    } else {
-      toast.error("Failed to create account. Try again!");
+    // console.log(data);
+    try {
+      const result = await signUpInit(data).unwrap();
+      // console.log("result", result);
+      // console.log("result?.data?.sendOTP", result?.data?.sendOTP);
+      // set Session
+      if (result?.data?.sendOTP) {
+        // sessionStorage.setItem("signupInit", result?.data?.sessionId);
+        session.set("signupInit", result?.data?.sessionId);
+        toast.success("OTP sent to your phone number!");
+        router.push("/verify");
+      } else {
+        toast.error("Failed to create account. Try again!");
+      }
+    } catch (error) {
+      toast.error(
+        error?.data?.message || "Failed to create account. Try again!"
+      );
     }
   };
   return (
@@ -122,7 +129,13 @@ const SignupForms = () => {
             type="submit"
             className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold cursor-pointer"
           >
-            Register
+            {isLoading ? (
+              <span className="flex items-center justify-center gap-3 ">
+                <Spinner /> Registering...
+              </span>
+            ) : (
+              "Register"
+            )}
           </button>
           <p className="text-sm text-neutral-500 text-center font-semibold">
             Already have an account?{" "}
