@@ -1,12 +1,14 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useSignUpInitMutation } from "@/Redux/Features/Auth/AuthApiSlice";
+import { setTime } from "@/Redux/Features/Auth/AuthHelperSlice";
 import { SignupSchema } from "@/Schema/SignupSchema";
 import { session } from "@/utils/SessionHelper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
@@ -14,6 +16,7 @@ import { Form, FormField, FormItem, FormMessage } from "../ui/form";
 import { Spinner } from "../ui/spinner";
 
 const SignupForms = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [signUpInit, { isLoading }] = useSignUpInitMutation();
   const form = useForm({
@@ -29,13 +32,20 @@ const SignupForms = () => {
     // console.log(data);
     try {
       const result = await signUpInit(data).unwrap();
-      // console.log("result", result);
+      console.log("result", result);
       // console.log("result?.data?.sendOTP", result?.data?.sendOTP);
       // set Session
       if (result?.data?.sendOTP) {
         // sessionStorage.setItem("signupInit", result?.data?.sessionId);
         session.set("signupInit", result?.data?.sessionId);
         toast.success("OTP sent to your phone number!");
+        dispatch(
+          setTime({
+            sessionId: result?.data?.sessionId,
+            time: result?.data?.time,
+            prevSend: result?.data?.prevSend,
+          })
+        );
         router.push("/verify");
       } else {
         toast.error("Failed to create account. Try again!");
@@ -99,6 +109,7 @@ const SignupForms = () => {
                   type={"password"}
                   placeholder={"Enter password"}
                   label={"Password"}
+                  required={true}
                   {...field}
                 />
                 <FormMessage className={cn("ml-1 text-xs")} />

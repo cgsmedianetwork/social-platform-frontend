@@ -12,17 +12,29 @@ import {
   useResendSignUpOTPMutation,
   useVerifySignUpOTPMutation,
 } from "@/Redux/Features/Auth/AuthApiSlice";
+import { setTime } from "@/Redux/Features/Auth/AuthHelperSlice";
 import { otpSchema } from "@/Schema/otpSchema";
 import CountDown from "@/utils/CountDown";
 import { session } from "@/utils/SessionHelper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail01Icon } from "hugeicons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const VerifyEmailPage = () => {
+  const dispatch = useDispatch();
   const [isResend, setIsResend] = useState(false);
+  const { sessionId, time, prevSend } = useSelector(
+    (state) => state.authHelper
+  );
+  useEffect(() => {
+    if (time > 0) {
+      setIsResend(false); // start showing the timer again
+    }
+  }, [time]);
+
   const [resendSignUpOTP, { isLoading: isResendLoading }] =
     useResendSignUpOTPMutation();
   const [verifySignUpOTP, { isLoading: isVerifyLoading }] =
@@ -50,6 +62,37 @@ const VerifyEmailPage = () => {
       }
     } catch (error) {
       toast.error(error.data.message || "Failed to verify OTP");
+    }
+  };
+
+  const resendOTP = async () => {
+    const sessionId = session.get("signupInit");
+    const payload = { sessionId };
+    const sendingToast = toast.loading("Sending OTP...");
+    try {
+      const result = await resendSignUpOTP(payload).unwrap();
+      // console.log(result);
+
+      if (result?.data?.sendOTP) {
+        dispatch(
+          setTime({
+            sessionId: result?.data?.sessionId,
+            time: result?.data?.time,
+            prevSend: result?.data?.prevSend,
+          })
+        );
+        toast.success("OTP resent successfully!", {
+          id: sendingToast,
+        });
+      } else {
+        toast.error("Failed to resend OTP!", {
+          id: sendingToast,
+        });
+      }
+    } catch (error) {
+      toast.error("Failed to resend OTP!", {
+        id: sendingToast,
+      });
     }
   };
   return (
@@ -153,13 +196,16 @@ const VerifyEmailPage = () => {
         </Form>
         <p className="text-sm text-center">
           Didn&apos;t receive the code?{" "}
-          {isResend ? (
-            <span className="text-brand-700 cursor-pointer">
+          {isResend || time <= 0 ? (
+            <span
+              onClick={() => resendOTP()}
+              className="text-brand-700 cursor-pointer"
+            >
               Click to resend
             </span>
           ) : (
             <CountDown
-              durationInSeconds={5864}
+              durationInSeconds={time}
               onComplete={() => {
                 setIsResend(true);
               }}

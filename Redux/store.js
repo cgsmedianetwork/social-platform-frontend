@@ -12,6 +12,7 @@ import {
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import { apiSlice } from "./BaseApi/BaseApi";
+import authHelperReducer from "./Features/Auth/AuthHelperSlice";
 import authReducer from "./Features/Auth/AuthSlice";
 
 const persistConfig = {
@@ -27,6 +28,7 @@ export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: persistedReducer,
+    authHelper: authHelperReducer,
   },
   devTools: process.env.NEXT_PUBLIC_ENVIRONMENT === "production",
   middleware: (gDM) =>
