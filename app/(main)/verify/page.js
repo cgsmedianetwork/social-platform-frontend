@@ -18,12 +18,14 @@ import CountDown from "@/utils/CountDown";
 import { session } from "@/utils/SessionHelper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail01Icon } from "hugeicons-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const VerifyEmailPage = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [isResend, setIsResend] = useState(false);
   const { sessionId, time, prevSend } = useSelector(
@@ -53,15 +55,16 @@ const VerifyEmailPage = () => {
     // console.log(payload);
     try {
       const result = await verifySignUpOTP(payload).unwrap();
-      console.log(result);
-      if (result.success) {
-        toast.success(result.message || "OTP verified successfully");
+      // console.log(result);
+      if (result?.success) {
+        toast.success(result?.message || "OTP verified successfully");
         form.reset();
+        router.push("/stepper");
       } else {
-        toast.error(result.message || "Failed to verify OTP");
+        toast.error(result?.message || "Failed to verify OTP");
       }
     } catch (error) {
-      toast.error(error.data.message || "Failed to verify OTP");
+      toast.error("Failed to verify OTP");
     }
   };
 
