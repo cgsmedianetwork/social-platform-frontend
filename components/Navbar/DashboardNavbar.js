@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import user from "../../Assets/images/testimonial image.webp";
 import logo from "../../Assets/logo.webp";
 import ActiveLink from "./ActiveLink";
@@ -8,7 +9,9 @@ const DashboardNavbar = () => {
   return (
     <div className="custom-container py-2.5 flex items-center justify-between gap-3">
       <div className="flex items-center gap-6">
-        <Image src={logo} alt="logo" className="w-14" />
+        <Link href={"/"}>
+          <Image src={logo} alt="logo" className="w-14" />
+        </Link>
         {/* <Link href="/dashboard" className="text-sm ">
           Dashboard
         </Link> */}
@@ -17,11 +20,13 @@ const DashboardNavbar = () => {
       </div>
       <div className="flex items-center gap-5">
         <MessageCircle size={20} />
-        <Image
-          src={user}
-          alt="user"
-          className="w-8 h-8 rounded-full object-cover"
-        />
+        <Link href={"/profile"}>
+          <Image
+            src={user}
+            alt="user"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+        </Link>
       </div>
     </div>
   );

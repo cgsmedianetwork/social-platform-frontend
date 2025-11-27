@@ -1,4 +1,5 @@
 import DashboardCard from "@/components/Cards/DashboardCard";
+import ProfilePerformance from "@/components/Cards/ProfilePerformance";
 import DashboardHeader from "@/components/Header/DashboardHeader";
 import DashboardNavbar from "@/components/Navbar/DashboardNavbar";
 
@@ -11,6 +12,7 @@ export default function DashboardPage() {
       <DashboardHeader />
       <div className="w-full custom-container">
         <DashboardCard />
+        <ProfilePerformance />
       </div>
     </div>
   );
