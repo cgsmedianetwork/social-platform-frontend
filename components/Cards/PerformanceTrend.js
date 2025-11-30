@@ -60,7 +60,7 @@ const PerformanceTrend = () => {
       <div className="my-4">
         <ChartContainer
           config={chartConfig}
-          className={"h-[280px] w-full py-8"}
+          className={"h-[300px] w-full py-8"}
         >
           <LineChart
             accessibilityLayer

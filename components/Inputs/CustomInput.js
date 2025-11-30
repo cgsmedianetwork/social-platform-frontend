@@ -27,10 +27,12 @@ const CustomInput = ({
   };
   return (
     <div className={`${className} flex flex-col gap-1.5`}>
-      <label htmlFor={id} className="text-neutral-600 text-sm font-medium ">
-        {label}
-        {required && <span className="text-red-600">*</span>}
-      </label>
+      {label && (
+        <label htmlFor={id} className="text-neutral-600 text-sm font-medium ">
+          {label}
+          {required && <span className="text-red-600">*</span>}
+        </label>
+      )}
       <div className="relative">
         <input
           type={selectedType || "text"}
