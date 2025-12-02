@@ -5,7 +5,7 @@ import UserList from "@/components/Cards/UserList";
 
 const page = () => {
   return (
-    <section className="p-4 px-6 bg-[#F9FBFB] flex flex-col flex-1">
+    <section className="p-4 px-6 flex flex-col flex-1">
       <DashboardCardforAdmin />
       <div className="flex gap-4 my-4 ">
         <div className="w-[70%]">

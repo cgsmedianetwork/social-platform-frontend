@@ -42,7 +42,7 @@ const AdminLayout = ({ children }) => {
             <button className="w-full py-2 px-4 rounded text-sm">Logout</button>
           </div>
         </aside>
-        <main className="flex-1 overflow-y-auto flex flex-col w-full">
+        <main className="flex-1 overflow-y-auto flex flex-col w-full bg-[#F9FBFB]">
           <AdminDashboardNavbar />
           {children}
         </main>

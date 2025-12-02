@@ -18,9 +18,9 @@ import {
   TableRow,
 } from "../ui/table";
 
-const UserList = () => {
+const UserList = ({ className }) => {
   return (
-    <div className="mb-48 px-5 py-4 bg-white rounded-md">
+    <div className={cn("mb-48 px-5 py-4 bg-white rounded-md", className)}>
       <div className="flex justify-between gap-2 ">
         <h1 className="text-lg font-medium">User List</h1>
         <div className="flex items-center gap-3">
