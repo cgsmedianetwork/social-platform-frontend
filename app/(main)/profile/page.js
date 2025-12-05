@@ -43,7 +43,7 @@ const page = () => {
               <SquarePen size={16} /> Edit
             </button>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 mt-3">
             <CustomInput placeholder={"Mr. John Doe"} />
             <CustomInput placeholder={"01717171717"} />
           </div>

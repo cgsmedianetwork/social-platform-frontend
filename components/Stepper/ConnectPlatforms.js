@@ -4,6 +4,7 @@ import {
   TiktokIcon,
   YoutubeIcon,
 } from "hugeicons-react";
+import Link from "next/link";
 
 const ConnectPlatforms = ({ setStep, currentStep }) => {
   return (
@@ -28,13 +29,15 @@ const ConnectPlatforms = ({ setStep, currentStep }) => {
           <YoutubeIcon size={18} strokeWidth={2.5} />
           Sign in with YouTube
         </button>
-        <button
-          type="button"
-          onClick={() => setStep(currentStep + 1)}
-          className="w-full py-3 bg-neutral-300 hover:bg-neutral-400 transition-all duration-300 rounded-md text-neutral-600 hover:text-neutral-900 font-medium cursor-pointer"
-        >
-          Go to Dashboard
-        </button>
+        <Link href="/">
+          <button
+            type="button"
+            onClick={() => setStep(currentStep + 1)}
+            className="w-full py-3 bg-neutral-300 hover:bg-neutral-400 transition-all duration-300 rounded-md text-neutral-600 hover:text-neutral-900 font-medium cursor-pointer"
+          >
+            Go to Dashboard
+          </button>
+        </Link>
       </form>
     </div>
   );

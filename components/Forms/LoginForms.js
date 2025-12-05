@@ -1,26 +1,57 @@
 "use client";
+import { login } from "@/actions/Login";
 import { cn } from "@/lib/utils";
+import { setUser } from "@/Redux/Features/Auth/AuthSlice";
 import { LoginSchema } from "@/Schema/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 import logo from "../../Assets/logo.webp";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
 import { Form, FormField, FormItem, FormMessage } from "../ui/form";
-
+import { Spinner } from "../ui/spinner";
 const LoginForms = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { user, token } = useSelector((state) => state.auth);
+  console.log("user", user, token);
+  const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
+      phone: "",
       password: "",
       remember: false,
     },
   });
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    // console.log(data);
+    setLoading(true);
+    const response = await login({
+      phone: data?.phone,
+      password: data?.password,
+    });
+    // console.log("response", response);
+    if (response?.success) {
+      toast.success(response?.message || "Login successful!");
+      dispatch(
+        setUser({
+          user: response?.data?.userData,
+          token: response?.data?.token,
+        })
+      );
+      setLoading(false);
+      router.push("/");
+    } else {
+      toast.error(response?.message || "Login failed!");
+      setLoading(false);
+    }
   };
   return (
     <div className="max-w-[420px] w-full p-5 bg-neutral-50 rounded-2xl">
@@ -46,13 +77,13 @@ const LoginForms = () => {
         >
           <FormField
             control={form.control}
-            name="email"
+            name="phone"
             render={({ field }) => (
               <FormItem className={"flex flex-col gap-1"}>
                 <CustomInput
-                  type={"text"}
-                  placeholder={"jondoe@gmail.com"}
-                  label={"Email"}
+                  type={"number"}
+                  placeholder={"018XXXXXXXXX"}
+                  label={"Phone"}
                   {...field}
                 />
                 <FormMessage className={cn("ml-1 text-xs")} />
@@ -99,7 +130,13 @@ const LoginForms = () => {
             type="submit"
             className="bg-brand-500 py-3 rounded-md text-neutral-950 font-semibold cursor-pointer"
           >
-            Login
+            {loading ? (
+              <span className="flex items-center gap-2 justify-center">
+                <Spinner /> Logging in...
+              </span>
+            ) : (
+              "Login"
+            )}
           </button>
           <p className="text-sm text-neutral-500 text-center font-semibold">
             Don&apos;t have an account?{" "}
