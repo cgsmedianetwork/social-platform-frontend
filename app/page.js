@@ -11,6 +11,7 @@ import Testimonial from "@/components/Testimonial/Testimonial";
 export default function Home() {
   return (
     <>
+      {/* <RedirectingHelper /> */}
       <div className="w-full overflow-x-hidden">
         <div className="relative w-full">
           <div className="pt-4 w-full custom-container">
