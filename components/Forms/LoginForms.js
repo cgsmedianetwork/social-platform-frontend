@@ -44,7 +44,7 @@ const LoginForms = () => {
       dispatch(
         setUser({
           user: response?.data?.userData,
-          token: response?.data?.token,
+          token: response?.data?.accessToken,
         })
       );
       setLoading(false);

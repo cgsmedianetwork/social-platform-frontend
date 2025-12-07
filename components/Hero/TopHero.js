@@ -17,7 +17,7 @@ const TopHero = () => {
         </p>
         <div className="flex">
           <Link
-            href={"/signup"}
+            href={"/login"}
             className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-3 rounded-md flex items-center gap-1 mt-7"
           >
             Try it Free <ArrowRight size={18} />

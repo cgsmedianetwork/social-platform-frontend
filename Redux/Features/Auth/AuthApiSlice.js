@@ -38,6 +38,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    logout: builder.mutation({
+      query: () => {
+        return {
+          url: "/user/logout",
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 
@@ -45,4 +53,5 @@ export const {
   useSignUpInitMutation,
   useResendSignUpOTPMutation,
   useVerifySignUpOTPMutation,
+  useLogoutMutation,
 } = authApiSlice;

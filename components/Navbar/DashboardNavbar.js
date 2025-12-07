@@ -1,8 +1,9 @@
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import user from "../../Assets/images/testimonial image.webp";
+
 import logo from "../../Assets/logo.webp";
+import DashboardProfileDropdown from "../Dropdown/DashboardProfileDropdown";
 import ActiveLink from "./ActiveLink";
 
 const DashboardNavbar = () => {
@@ -20,13 +21,7 @@ const DashboardNavbar = () => {
       </div>
       <div className="flex items-center gap-5">
         <MessageCircle size={20} />
-        <Link href={"/profile"}>
-          <Image
-            src={user}
-            alt="user"
-            className="w-8 h-8 rounded-full object-cover"
-          />
-        </Link>
+        <DashboardProfileDropdown />
       </div>
     </div>
   );

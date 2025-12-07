@@ -25,10 +25,10 @@ const Navbar = () => {
       </div>
       <div>
         <Link
-          href={"/signup"}
+          href={"/login"}
           className="bg-brand-500 text-sm font-semibold text-neutral-950 px-4 py-2 rounded-md flex items-center gap-1"
         >
-          Sign Up <ArrowRight size={18} />
+          Sign In <ArrowRight size={18} />
         </Link>
       </div>
     </nav>
