@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { logout } from "../Features/Auth/AuthSlice";
 const BASE_API_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1`;
 
 const baseQuery = fetchBaseQuery({
@@ -15,13 +16,15 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+  console.log(result);
 
   if (result?.error?.status === 401) {
     const res = await fetch(`${BASE_API_URL}/user/refresh-token`, {
       method: "POST",
       credentials: "include",
     });
-    const data = res.json();
+    const data = await res.json();
+    console.log(data);
 
     if (data?.data?.result?.accessToken) {
       const user = api.getState().auth.user;

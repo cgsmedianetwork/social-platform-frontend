@@ -6,9 +6,9 @@ import { Logout05Icon, UserStoryIcon } from "hugeicons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import user from "../../Assets/images/testimonial image.webp";
+import userImage from "../../Assets/images/user annony ous.webp";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +19,8 @@ import {
 const DashboardProfileDropdown = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  // console.log(user);
   const [logout, { isLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
@@ -37,9 +39,9 @@ const DashboardProfileDropdown = () => {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger>
         <Image
-          src={user}
+          src={user?.image || userImage}
           alt="user"
-          className="w-8 h-8 rounded-full object-cover cursor-pointer "
+          className="w-8 h-8 rounded-full object-cover cursor-pointer"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className={"min-w-40"}>
