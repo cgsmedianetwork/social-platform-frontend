@@ -38,6 +38,20 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    login: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/user/login",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data,
+        };
+      },
+    }),
+
     logout: builder.mutation({
       query: () => {
         return {
@@ -54,4 +68,5 @@ export const {
   useResendSignUpOTPMutation,
   useVerifySignUpOTPMutation,
   useLogoutMutation,
+  useLoginMutation,
 } = authApiSlice;

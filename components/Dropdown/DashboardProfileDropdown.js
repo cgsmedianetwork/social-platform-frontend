@@ -41,7 +41,7 @@ const DashboardProfileDropdown = () => {
         <Image
           src={user?.image || userImage}
           alt="user"
-          className="w-8 h-8 rounded-full object-cover cursor-pointer"
+          className="w-8 h-8 rounded-full object-cover cursor-pointer border"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className={"min-w-40"}>

@@ -1,6 +1,6 @@
 "use server";
 
-export const login = async ({ phone, password }) => {
+export const loginAction = async ({ phone, password }) => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   //   console.log("backendUrl", backendUrl);
   if (!phone || !password) {
@@ -11,6 +11,7 @@ export const login = async ({ phone, password }) => {
     const response = await fetch(`${backendUrl}/api/v1/user/login`, {
       method: "POST",
       body: JSON.stringify({ phone, password }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

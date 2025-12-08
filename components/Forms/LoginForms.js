@@ -1,6 +1,6 @@
 "use client";
-import { login } from "@/actions/Login";
 import { cn } from "@/lib/utils";
+import { useLoginMutation } from "@/Redux/Features/Auth/AuthApiSlice";
 import { setUser } from "@/Redux/Features/Auth/AuthSlice";
 import { LoginSchema } from "@/Schema/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,11 +16,13 @@ import CustomCheckbox from "../Inputs/CustomCheckbox";
 import CustomInput from "../Inputs/CustomInput";
 import { Form, FormField, FormItem, FormMessage } from "../ui/form";
 import { Spinner } from "../ui/spinner";
+
 const LoginForms = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { user, token } = useSelector((state) => state.auth);
   console.log("user", user, token);
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(LoginSchema),
@@ -37,8 +39,8 @@ const LoginForms = () => {
     const response = await login({
       phone: data?.phone,
       password: data?.password,
-    });
-    // console.log("response", response);
+    }).unwrap();
+    console.log("response", response);
     if (response?.success) {
       toast.success(response?.message || "Login successful!");
       dispatch(
@@ -47,8 +49,15 @@ const LoginForms = () => {
           token: response?.data?.accessToken,
         })
       );
+      // Cookies.set("refreshToken", response?.data?.refreshToken, {
+      //   expires: 30,
+      //   secure: true,
+      //   path: "/",
+      //   sameSite: "strict",
+      //   httpOnly: true,
+      // });
       setLoading(false);
-      router.push("/");
+      router.push("/dashboard");
     } else {
       toast.error(response?.message || "Login failed!");
       setLoading(false);
