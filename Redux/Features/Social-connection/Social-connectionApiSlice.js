@@ -13,7 +13,19 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    connectFacebook: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/social-connection/facebook/connect",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useConnectYoutubeMutation } = socialConnectionApiSlice;
+export const { useConnectYoutubeMutation, useConnectFacebookMutation } =
+  socialConnectionApiSlice;

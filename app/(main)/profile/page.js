@@ -6,8 +6,6 @@ import Image from "next/image";
 import logo from "../../../Assets/images/testimonial image.webp";
 
 const page = () => {
-  const HandleYoutube = () => {};
-
   return (
     <div className="w-full">
       <div className="w-full border-b border-[#EAECF0]">
@@ -17,7 +15,7 @@ const page = () => {
         {/* form  */}
         <label
           htmlFor="profile-picture"
-          className="relative overflow-hidden w-28 h-28 my-8 rounded-full inline-block cursor-pointer group"
+          className="relative overflow-hidden w-28 h-28 mt-8 mb-4 rounded-full inline-block cursor-pointer group"
         >
           <Image
             src={logo}

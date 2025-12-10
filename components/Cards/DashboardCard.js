@@ -48,11 +48,11 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Reach</p>
-          <p className="text-3xl font-semibold mt-5">2,000</p>
+          <p className="text-3xl font-semibold mt-5">202</p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-green-700 text-xs">
               <ArrowUp size={16} strokeWidth={2.5} className="text-green-600" />{" "}
-              100%{" "}
+              5%{" "}
             </span>
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
@@ -103,11 +103,11 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Like</p>
-          <p className="text-3xl font-semibold mt-5">2,000</p>
+          <p className="text-3xl font-semibold mt-5">529</p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-chart-4 text-xs">
               <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}
-              100%{" "}
+              85%{" "}
             </span>
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
@@ -157,11 +157,11 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Comments</p>
-          <p className="text-3xl font-semibold mt-5">2,000</p>
+          <p className="text-3xl font-semibold mt-5">00</p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-chart-4 text-xs">
               <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}
-              100%{" "}
+              00%{" "}
             </span>
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>

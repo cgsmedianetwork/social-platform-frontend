@@ -1,5 +1,8 @@
 "use client";
-import { useConnectYoutubeMutation } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
+import {
+  useConnectFacebookMutation,
+  useConnectYoutubeMutation,
+} from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { Trash2 } from "lucide-react";
 import {
   FacebookButton,
@@ -10,6 +13,8 @@ import {
 
 const ConnectSocialMedia = () => {
   const [connectYoutube, { isLoading }] = useConnectYoutubeMutation();
+  const [connectFacebook, { isLoading: isLoadingFacebook }] =
+    useConnectFacebookMutation();
   const handleYoutube = async () => {
     try {
       const response = await connectYoutube({});
@@ -22,6 +27,17 @@ const ConnectSocialMedia = () => {
     } finally {
     }
   };
+  const handleFacebook = async () => {
+    try {
+      const response = await connectFacebook({});
+      console.log(response);
+      if (response?.data?.url) {
+        window.location.href = response?.data?.url;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="mt-6">
       <h2 className="text-lg font-semibold text-neutral-900">
@@ -32,7 +48,10 @@ const ConnectSocialMedia = () => {
       </p>
       <div className="flex flex-col gap-4 mt-5 mb-5">
         <div className="flex items-center justify-between">
-          <FacebookButton />
+          <FacebookButton
+            handleFacebook={handleFacebook}
+            className={"cursor-pointer"}
+          />
           <button className="text-sm px-3 py-1.5 flex items-center gap-1 border border-red-500 text-red-500 rounded-md font-semibold">
             <Trash2 size={16} /> Delete Link
           </button>
@@ -57,7 +76,10 @@ const ConnectSocialMedia = () => {
             Enter your profile link to add these social accounts to your profile
           </p>
           <div className="flex items-center gap-2 justify-between">
-            <YoutubeButton handleYoutube={handleYoutube} />
+            <YoutubeButton
+              handleYoutube={handleYoutube}
+              className={"cursor-pointer"}
+            />
             {/* <CustomInput placeholder={"Enter your link"} /> */}
           </div>
         </div>
