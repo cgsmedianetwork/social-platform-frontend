@@ -16,7 +16,7 @@ export const FacebookButton = ({ handleFacebook, className }) => {
       )}
     >
       <Facebook02Icon size={20} strokeWidth={2} />
-      Sign in with Facebook
+      Add Facebook Account
     </button>
   );
 };
@@ -31,7 +31,7 @@ export const InstagramButton = ({ handleInstagram, className }) => {
       )}
     >
       <InstagramIcon size={20} strokeWidth={2} />
-      Sign in with Instagram
+      Add Instagram Account
     </button>
   );
 };
@@ -46,7 +46,7 @@ export const TiktokButton = ({ handleTiktok, className }) => {
       )}
     >
       <TiktokIcon size={20} strokeWidth={2} />
-      Sign in with TikTok
+      Add TikTok Account
     </button>
   );
 };
@@ -57,12 +57,12 @@ export const YoutubeButton = ({ handleYoutube, className }) => {
     <button
       onClick={handleYoutube}
       className={cn(
-        "bg-[#F04438] text-white text-sm px-4 py-3 rounded-md flex items-center justify-center gap-2 mt-5",
+        "bg-[#F04438] text-white text-sm px-4 py-3 rounded-md flex items-center justify-center gap-2",
         className
       )}
     >
       <YoutubeIcon size={20} strokeWidth={2} />
-      Sign in with YouTube
+      Add YouTube Account
     </button>
   );
 };

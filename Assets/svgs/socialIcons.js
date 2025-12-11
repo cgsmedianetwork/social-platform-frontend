@@ -1,9 +1,15 @@
-export const FacebookIcon = ({ width, height, ...props }) => (
+export const FacebookIcon = ({
+  width = 24,
+  height = 24,
+  className,
+  ...props
+}) => (
   <svg
-    width={width || 24}
-    height={height || 24}
+    width={width}
+    height={height}
     viewBox="0 0 24 24"
     fill="none"
+    className={className}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
