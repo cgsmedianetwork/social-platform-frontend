@@ -76,7 +76,7 @@ const UserList = ({ className }) => {
                   <YoutubeIcon />
                 </div>
               </TableCell>
-              <TableCell>Diamond Star</TableCell>
+              <TableCell>Diamond</TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="pl-4 py-3 ">
@@ -100,12 +100,10 @@ const UserList = ({ className }) => {
               <TableCell>
                 <div className="flex items-center gap-2">
                   <FacebookIcon />
-                  <InstagramIcon />
                   <TikTokIcon />
-                  <YoutubeIcon />
                 </div>
               </TableCell>
-              <TableCell>Diamond Star</TableCell>
+              <TableCell>Diamond</TableCell>
             </TableRow>
           </TableBody>
         </Table>
