@@ -40,7 +40,7 @@ const LoginForms = () => {
       phone: data?.phone,
       password: data?.password,
     }).unwrap();
-    console.log("response", response);
+    // console.log("response", response);
     if (response?.success) {
       toast.success(response?.message || "Login successful!");
       dispatch(

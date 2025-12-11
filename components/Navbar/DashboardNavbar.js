@@ -17,7 +17,7 @@ const DashboardNavbar = () => {
           Dashboard
         </Link> */}
         <ActiveLink href={"/dashboard"}>Dashboard</ActiveLink>
-        <ActiveLink href={"/meeting-schedule"}>Meeting Schedule</ActiveLink>
+        <ActiveLink href={"/booking-schedule"}>Booking Schedule</ActiveLink>
       </div>
       <div className="flex items-center gap-5">
         <MessageCircle size={20} />

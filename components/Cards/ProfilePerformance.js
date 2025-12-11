@@ -100,7 +100,7 @@ const ProfilePerformance = () => {
   return (
     <div className="border rounded-lg p-5 px-7 my-4 mb-12">
       <h1 className="text-base font-semibold w-full border-b pb-5 text-neutral-900">
-        Profile Performance
+        Profile Performance - views
       </h1>
       <div className="py-8 flex items-center justify-between">
         <div className="-rotate-90 text-sm text-neutral-500">views</div>
