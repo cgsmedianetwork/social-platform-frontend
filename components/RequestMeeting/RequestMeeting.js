@@ -17,14 +17,14 @@ const FormSchema = z.object({
   }),
 });
 
-const RequestMeeting = () => {
+const RequestMeeting = ({ className }) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
   const form = useForm({
     resolver: zodResolver(FormSchema),
   });
   function onSubmit(data) {
-    console.log(data);
+    // console.log(data);
   }
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);
   function handleDateSelect(date) {
@@ -56,7 +56,10 @@ const RequestMeeting = () => {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1 px-3 py-1.5 border-2 border-brand-500 rounded-md text-sm font-semibold cursor-pointer"
+        className={cn(
+          "flex items-center gap-1 px-3 py-1.5 border-2 border-brand-500 rounded-md text-sm font-semibold cursor-pointer",
+          className
+        )}
       >
         <Plus size={18} strokeWidth={2.5} /> Book a Meeting
       </button>

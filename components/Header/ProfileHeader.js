@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import logo from "../../Assets/images/user annony ous.webp";
 
 const ProfileHeader = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state?.auth);
   //   console.log(user);
   return (
-    <div cls>
+    <div className="">
       <div className="flex flex-col items-center gap-4 py-8">
         <label
           htmlFor="profile-picture"

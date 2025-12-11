@@ -1,5 +1,6 @@
 "use client";
 import DashboardNavbar from "@/components/Navbar/DashboardNavbar";
+import RequestMeeting from "@/components/RequestMeeting/RequestMeeting";
 import {
   CalendarBody,
   CalendarHeader,
@@ -7,7 +8,6 @@ import {
   CalendarProvider,
 } from "@/components/ui/shadcn-io/calendar";
 import { faker } from "@faker-js/faker";
-import { Plus } from "lucide-react";
 
 const page = () => {
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -27,24 +27,35 @@ const page = () => {
       status: faker.helpers.arrayElement(statuses),
     }));
 
+  // console.log("exampleFeatures", exampleFeatures);
+
   return (
     <div className="w-full">
       <div className="w-full border-b border-[#EAECF0]">
         <DashboardNavbar />
       </div>
-      <div className="w-full custom-container flex items-center justify-between mt-5">
-        <h1 className="text-lg font-semibold mt-4">Booking Schedule</h1>
-        <button className="flex items-center gap-1 px-3 py-2 bg-brand-500 rounded-md text-sm font-semibold">
+      <div className="w-full custom-container flex items-center justify-between mt-4">
+        <h1 className="text-lg font-semibold mt-4">Schedule Meeting</h1>
+        <RequestMeeting />
+        {/* <button className="flex items-center gap-1 px-3 py-2 bg-brand-500 rounded-md text-sm font-semibold">
           <Plus size={18} strokeWidth={2.5} /> Book a new meeting
-        </button>
+        </button> */}
       </div>
       <div className="w-full custom-container">
-        <div className=" w-full border mt-8 rounded-lg">
-          <CalendarProvider>
-            <CalendarHeader />
+        <div className=" w-full border mt-8 mb-12 rounded-lg">
+          <CalendarProvider className={""}>
+            <CalendarHeader
+              className={
+                " bg-brand-100 !overflow-hidden rounded-tl-lg rounded-tr-lg"
+              }
+            />
             <CalendarBody features={exampleFeatures}>
               {({ feature }) => (
-                <CalendarItem feature={feature} key={feature.id} />
+                <CalendarItem
+                  feature={feature}
+                  key={feature.id}
+                  // className={"bg-brand-100"}
+                />
               )}
             </CalendarBody>
           </CalendarProvider>
