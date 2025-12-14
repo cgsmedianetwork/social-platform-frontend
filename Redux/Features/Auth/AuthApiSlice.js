@@ -60,6 +60,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    updateProfile: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/user/update-user",
+          method: "PATCH",
+          body: data,
+        };
+      },
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
 
@@ -69,4 +79,5 @@ export const {
   useVerifySignUpOTPMutation,
   useLogoutMutation,
   useLoginMutation,
+  useUpdateProfileMutation,
 } = authApiSlice;

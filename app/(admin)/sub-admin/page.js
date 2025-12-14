@@ -1,5 +1,4 @@
 import CustomInput from "@/components/Inputs/CustomInput";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -41,7 +40,7 @@ const SubAdminPage = () => {
             <TableRow>
               <TableHead className="pl-5">Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead className={"px-5"}>Permission</TableHead>
+              <TableHead className={"px-5"}>Phone</TableHead>
               <TableHead className="">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -52,7 +51,7 @@ const SubAdminPage = () => {
               <TableCell
                 className={"text-ellipsis whitespace-break-spaces px-5"}
               >
-                Analytics view, Dashboard view
+                +8801712345678
               </TableCell>
               <TableCell>
                 <div className="flex gap-2">
@@ -72,7 +71,7 @@ const SubAdminPage = () => {
               <TableCell
                 className={"text-ellipsis whitespace-break-spaces px-5"}
               >
-                Analytics view, Dashboard view
+                +8801712345678
               </TableCell>
               <TableCell>
                 <div className="flex gap-2">
@@ -99,7 +98,7 @@ const SubAdminPage = () => {
             placeholder={"johndoe@gmail.com"}
             className={"sm:!w-1/2 !w-full "}
           />
-          <div>
+          {/* <div>
             <label
               htmlFor="permission"
               className="text-neutral-600 text-sm font-medium"
@@ -144,13 +143,13 @@ const SubAdminPage = () => {
                 </label>
               </div>
             </div>
-          </div>
-          <div className="mt-5">
+          </div> */}
+          <div className="mt-3">
             <button
               type="submit"
               className="bg-brand-500 text-sm font-medium px-4 py-2 rounded-md"
             >
-              Save
+              ADD
             </button>
           </div>
         </form>

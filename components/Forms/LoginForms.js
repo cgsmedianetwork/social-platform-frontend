@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import logo from "../../Assets/logo.webp";
 import CustomCheckbox from "../Inputs/CustomCheckbox";
@@ -20,8 +20,6 @@ import { Spinner } from "../ui/spinner";
 const LoginForms = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { user, token } = useSelector((state) => state.auth);
-  console.log("user", user, token);
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const [loading, setLoading] = useState(false);
   const form = useForm({
@@ -49,13 +47,6 @@ const LoginForms = () => {
           token: response?.data?.accessToken,
         })
       );
-      // Cookies.set("refreshToken", response?.data?.refreshToken, {
-      //   expires: 30,
-      //   secure: true,
-      //   path: "/",
-      //   sameSite: "strict",
-      //   httpOnly: true,
-      // });
       setLoading(false);
       router.push("/dashboard");
     } else {

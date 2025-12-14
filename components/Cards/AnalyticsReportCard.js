@@ -1,9 +1,14 @@
 "use client";
-import { FacebookIcon } from "@/Assets/svgs/socialIcons";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 
-const AnalyticsReportCard = () => {
+const AnalyticsReportCard = ({
+  title,
+  followers,
+  engagement,
+  impressions,
+  icon,
+}) => {
   const description = "A line chart";
   const chartData = [
     { month: "January", desktop: 186 },
@@ -22,15 +27,13 @@ const AnalyticsReportCard = () => {
   return (
     <div className="bg-white rounded-md p-4 px-5">
       <div className="flex items-center gap-3">
-        <FacebookIcon />{" "}
-        <span className="inline-block text-base text-neutral-800">
-          Facebook Summary
-        </span>
+        {icon}
+        <span className="inline-block text-base text-neutral-800">{title}</span>
       </div>
       <div className="flex items-center justify-between gap-2 mt-4 text-sm text-neutral-500">
-        <p>Followers: 1000</p>
-        <p>Engagement: 288</p>
-        <p>Impressions: 20.8k</p>
+        <p>Followers: {followers}</p>
+        <p>Engagement: {engagement}</p>
+        <p>Impressions: {impressions}</p>
       </div>
       <div className="mt-8 pb-3">
         <ChartContainer config={chartConfig} className={"h-[250px] w-full"}>

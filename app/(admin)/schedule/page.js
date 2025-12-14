@@ -1,4 +1,5 @@
 "use client";
+import RequestMeeting from "@/components/RequestMeeting/RequestMeeting";
 import {
   CalendarBody,
   CalendarHeader,
@@ -26,7 +27,10 @@ const SchedulePage = () => {
     }));
   return (
     <div className="p-5 px-12 pb-10">
-      <h1 className="text-lg font-semibold ">Schedule Meeting</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-lg font-semibold ">Schedule Meeting</h1>
+        <RequestMeeting className={"bg-brand-500"} buttonText={"Confirm"} />
+      </div>
       <div className=" w-full border mt-5 rounded-lg overflow-hidden">
         <CalendarProvider>
           <CalendarHeader className={"bg-brand-100"} />

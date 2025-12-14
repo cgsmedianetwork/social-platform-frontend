@@ -17,7 +17,7 @@ const FormSchema = z.object({
   }),
 });
 
-const RequestMeeting = ({ className }) => {
+const RequestMeeting = ({ className, title, buttonText }) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
   const form = useForm({
@@ -61,7 +61,7 @@ const RequestMeeting = ({ className }) => {
           className
         )}
       >
-        <Plus size={18} strokeWidth={2.5} /> Book a Meeting
+        <Plus size={18} strokeWidth={2.5} /> {title || "Book a Meeting"}
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className={cn("w-fit p-4")}>
@@ -193,7 +193,7 @@ const RequestMeeting = ({ className }) => {
                   type="submit"
                   className="bg-brand-500 text-slate-700 px-4 py-1.5 rounded-md text-sm cursor-pointer font-semibold"
                 >
-                  Request
+                  {buttonText || "Request"}
                 </button>
               </div>
             </form>

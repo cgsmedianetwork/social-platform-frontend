@@ -24,8 +24,8 @@ const DashboardProfileDropdown = () => {
   const [logout, { isLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
+    const toastId = toast.loading("Logging out...");
     try {
-      const toastId = toast.loading("Logging out...");
       await logout().unwrap();
       router.push("/");
       dispatch(logoutAction());
@@ -41,6 +41,8 @@ const DashboardProfileDropdown = () => {
         <Image
           src={user?.image || userImage}
           alt="user"
+          width={32}
+          height={32}
           className="w-8 h-8 rounded-full object-cover cursor-pointer border"
         />
       </DropdownMenuTrigger>
