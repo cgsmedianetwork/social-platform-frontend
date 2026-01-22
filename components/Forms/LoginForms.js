@@ -37,20 +37,22 @@ const LoginForms = () => {
     const response = await login({
       phone: data?.phone,
       password: data?.password,
-    }).unwrap();
+    })
+
     // console.log("response", response);
-    if (response?.success) {
-      toast.success(response?.message || "Login successful!");
+
+    if (response?.data?.success) {
+      toast.success(response?.data?.message || "Login successful!");
       dispatch(
         setUser({
-          user: response?.data?.userData,
-          token: response?.data?.accessToken,
+          user: response?.data?.data?.userData,
+          token: response?.data?.data?.accessToken,
         })
       );
       setLoading(false);
       router.push("/dashboard");
     } else {
-      toast.error(response?.message || "Login failed!");
+      toast.error(response?.error?.data?.message || "Login failed!");
       setLoading(false);
     }
   };

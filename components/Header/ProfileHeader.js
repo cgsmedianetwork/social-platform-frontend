@@ -18,7 +18,7 @@ const ProfileHeader = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
   const { user, token } = useSelector((state) => state?.auth);
-  console.log(user);
+  // console.log(user);
   const [updateProfile, { isLoading: isUpdateProfileLoading }] =
     useUpdateProfileMutation();
   const form = useForm({
@@ -57,6 +57,7 @@ const ProfileHeader = () => {
                 alt="logo"
                 width={96}
                 height={96}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
               />
               <label
@@ -79,7 +80,7 @@ const ProfileHeader = () => {
               </div>
             )}
           </div>
-          <div>
+          {user && <div>
             <h1 className="text-2xl font-semibold text-neutral-600 capitalize text-center">
               {user?.name}
             </h1>
@@ -93,7 +94,7 @@ const ProfileHeader = () => {
                 <Call02Icon size={16} /> {user?.phone}
               </p>
             )}
-          </div>
+          </div>}
         </form>
       </Form>
     </div>

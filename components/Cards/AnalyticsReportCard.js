@@ -8,6 +8,7 @@ const AnalyticsReportCard = ({
   engagement,
   impressions,
   icon,
+  color,
 }) => {
   const description = "A line chart";
   const chartData = [
@@ -21,7 +22,7 @@ const AnalyticsReportCard = ({
   const chartConfig = {
     desktop: {
       label: "Desktop",
-      color: "var(--chart-1)",
+      color: color || "var(--chart-1)",
     },
   };
   return (

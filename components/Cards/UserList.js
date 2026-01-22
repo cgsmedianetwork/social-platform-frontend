@@ -7,6 +7,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ListFilter, Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import userImage from "../../Assets/images/testimonial image.webp";
 import CustomInput from "../Inputs/CustomInput";
 import {
@@ -51,7 +52,10 @@ const UserList = ({ className }) => {
           <TableBody>
             <TableRow>
               <TableCell className="pl-4 py-3 ">
-                <div className="flex items-center gap-3">
+                <Link
+                  href={"/user/new-user"}
+                  className="flex items-center gap-3"
+                >
                   <div className="w-9 h-9 rounded-full overflow-hidden">
                     <Image
                       src={userImage}
@@ -65,7 +69,7 @@ const UserList = ({ className }) => {
                       john.doe@example.com
                     </p>
                   </div>
-                </div>
+                </Link>
               </TableCell>
               <TableCell>#1234567890</TableCell>
               <TableCell>
@@ -80,7 +84,10 @@ const UserList = ({ className }) => {
             </TableRow>
             <TableRow>
               <TableCell className="pl-4 py-3 ">
-                <div className="flex items-center gap-3">
+                <Link
+                  href={"/user/new-user"}
+                  className="flex items-center gap-3"
+                >
                   <div className="w-9 h-9 rounded-full overflow-hidden">
                     <Image
                       src={userImage}
@@ -94,7 +101,7 @@ const UserList = ({ className }) => {
                       john.doe@example.com
                     </p>
                   </div>
-                </div>
+                </Link>
               </TableCell>
               <TableCell>#1234567890</TableCell>
               <TableCell>

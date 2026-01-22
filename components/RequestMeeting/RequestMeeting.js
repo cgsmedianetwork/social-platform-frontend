@@ -1,35 +1,71 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { useGetAdminAndSubAdminQuery } from "@/Redux/Features/Auth/AuthApiSlice";
+import { useCreateMeetingMutation } from "@/Redux/Features/meetings/meetingApiSlice";
+import BookingMeetingSchema from "@/Schema/BookingMeetingSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import z from "zod";
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { Form, FormField, FormItem, FormMessage } from "../ui/form";
+import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Skeleton } from "../ui/skeleton";
+import { Spinner } from "../ui/spinner";
 
-const FormSchema = z.object({
-  time: z.date({
-    required_error: "A date and time is required.",
-  }),
-});
+
 
 const RequestMeeting = ({ className, title, buttonText }) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
+  const [createMeeting, { isLoading: isCreateMeetingLoading }] =
+    useCreateMeetingMutation();
+  const { data, isLoading: isAdminAndSubAdminLoading } =
+    useGetAdminAndSubAdminQuery(undefined, {
+      skip: !open,
+    });
+  // console.log(data);
   const form = useForm({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(BookingMeetingSchema),
+    defaultValues: {
+      meetingWith: "",
+      time: undefined,
+    }
   });
-  function onSubmit(data) {
+
+  // on submit function
+  async function onSubmit(data) {
     // console.log(data);
+    try {
+      const response = await createMeeting(data).unwrap();
+      // console.log(response);
+      if (response?.success) {
+        toast.success(response?.message || "Meeting requested successfully!");
+        setOpen(false);
+        form.reset();
+      } else {
+        toast.error(response?.message || "Failed to request meeting!");
+      }
+    } catch (error) {
+      // console.log(error);
+      toast.error(error?.data?.message || "Failed to request meeting!");
+    }
   }
+
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);
   function handleDateSelect(date) {
     if (date) {
-      form.setValue("time", date);
+      form.setValue("time", date, {shouldValidate: true, shouldDirty: true});
     }
   }
   function handleTimeChange(type, value) {
@@ -50,8 +86,10 @@ const RequestMeeting = ({ className, title, buttonText }) => {
       }
     }
 
-    form.setValue("time", newDate);
+    form.setValue("time", newDate, {shouldValidate: true, shouldDirty: true});
+    // console.log("time changing...")
   }
+
   return (
     <div>
       <button
@@ -64,22 +102,68 @@ const RequestMeeting = ({ className, title, buttonText }) => {
         <Plus size={18} strokeWidth={2.5} /> {title || "Book a Meeting"}
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className={cn("w-fit p-4")}>
+        <DialogContent className={cn("border py-3.5 ")}>
           <DialogTitle
-            className={cn(
-              "text-base font-medium text-center text-neutral-600 "
-            )}
+            className={"text-base font-medium text-center text-neutral-600 "}
           >
-            Pick up a date and time
+            Book a Meeting
           </DialogTitle>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+              {/* meeting with  */}
+              <div>
+                <FormField
+                  control={form.control}
+                  name="meetingWith"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel
+                        className={
+                          "text-neutral-600 text-sm font-medium inline-block "
+                        }
+                      >
+                        Select Meeting With
+                        <span className="text-red-600">*</span>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className={"w-full !py-5"}>
+                          <SelectValue placeholder={"Select meeting with"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {isAdminAndSubAdminLoading ? (
+                            <Skeleton className="w-full h-10" />
+                          ) : (
+                            data?.data?.map((item) => (
+                              <SelectItem key={item?.id} value={item?.id}>
+                                {item?.name}
+                              </SelectItem>
+                            ))
+                          )}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              {/* meeting time  */}
               <FormField
                 control={form.control}
                 name="time"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="sm:flex border rounded-md">
+                    <FormLabel
+                      className={
+                        "text-neutral-600 text-sm font-medium inline-block"
+                      }
+                    >
+                      Select Meeting Time
+                      <span className="text-red-600">*</span>
+                    </FormLabel>
+                    <div className="sm:flex gap-4 border rounded-md">
                       <Calendar
                         mode="single"
                         selected={field.value}
@@ -94,6 +178,9 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                       />
                       <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
                         <ScrollArea className="w-64 sm:w-auto">
+                          <p className="sticky top-0 bg-white z-10 py-2 text-center text-sm font-semibold">
+                            Hour
+                          </p>
                           <div className="flex sm:flex-col p-2">
                             {Array.from({ length: 12 }, (_, i) => i + 1)
                               .reverse()
@@ -111,6 +198,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                                   onClick={() =>
                                     handleTimeChange("hour", hour.toString())
                                   }
+                                  type="button"
                                 >
                                   {hour}
                                 </Button>
@@ -122,8 +210,11 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                           />
                         </ScrollArea>
                         <ScrollArea className="w-64 sm:w-auto">
+                          <p className="sticky top-0 bg-white z-10 py-2 text-center text-sm font-semibold">
+                            Min
+                          </p>
                           <div className="flex sm:flex-col p-2">
-                            {Array.from({ length: 12 }, (_, i) => i * 5).map(
+                            {Array.from({ length: 6 }, (_, i) => i * 10).map(
                               (minute) => (
                                 <Button
                                   key={minute}
@@ -141,6 +232,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                                       minute.toString()
                                     )
                                   }
+                                  type="button"
                                 >
                                   {minute.toString().padStart(2, "0")}
                                 </Button>
@@ -169,6 +261,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                                 }
                                 className="sm:w-full shrink-0 aspect-square"
                                 onClick={() => handleTimeChange("ampm", ampm)}
+                                type="button"
                               >
                                 {ampm}
                               </Button>
@@ -193,7 +286,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                   type="submit"
                   className="bg-brand-500 text-slate-700 px-4 py-1.5 rounded-md text-sm cursor-pointer font-semibold"
                 >
-                  {buttonText || "Request"}
+                  { isCreateMeetingLoading ? <span className="flex items-center justify-center gap-2"><Spinner className={"size-3"}/> Requesting...</span> : buttonText || "Request"}
                 </button>
               </div>
             </form>

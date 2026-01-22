@@ -1,25 +1,27 @@
 "use client";
 import {
-  FacebookIcon,
-  InstagramIcon,
-  YoutubeIcon,
-} from "@/Assets/svgs/socialIcons";
-import {
   useConnectFacebookMutation,
   useConnectYoutubeMutation,
+  useGetListOfAccountsQuery,
 } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { MultiplicationSignIcon } from "hugeicons-react";
 import Image from "next/image";
-import account from "../../Assets/images/testimonial image.webp";
+import { useState } from "react";
 import {
   FacebookButton,
   InstagramButton,
   TiktokButton,
   YoutubeButton,
 } from "../Buttons/SocialButtons";
+import ModalforListOfAccount from "../CustomModal/ModalforListOfAccount";
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 const ConnectSocialMedia = () => {
+  const [open, setOpen] = useState(false);
+  const [selectedAccounts, setSelectedAccounts] = useState([]);
   const [connectYoutube, { isLoading }] = useConnectYoutubeMutation();
+  const {data: listOfAccounts, isLoading: isLoadingListOfAccounts} = useGetListOfAccountsQuery()
+  // console.log(listOfAccounts);
   const [connectFacebook, { isLoading: isLoadingFacebook }] =
     useConnectFacebookMutation();
   const handleYoutube = async () => {
@@ -37,7 +39,7 @@ const ConnectSocialMedia = () => {
   const handleFacebook = async () => {
     try {
       const response = await connectFacebook({});
-      console.log(response);
+      // console.log(response);
       if (response?.data?.url) {
         window.location.href = response?.data?.url;
       }
@@ -53,7 +55,7 @@ const ConnectSocialMedia = () => {
       <p className="text-sm text-neutral-600 mt-1 text-center ">
         Build trust with your network by connecting your social profiles
       </p>
-      <div className="flex flex-col gap-6 mt-5 mb-5 max-w-[500px] mx-auto">
+      <div className="flex flex-col gap-6 mt-8 mb-5 max-w-[500px] mx-auto">
         {/* facebook accounts  */}
         <div className="flex items-center justify-between gap-3">
           <FacebookButton
@@ -61,45 +63,32 @@ const ConnectSocialMedia = () => {
             className={"cursor-pointer"}
           />
           {/* accounts  */}
-          <div className="flex items-center gap-2">
-            <div className=" object-cover relative cursor-pointer group">
-              <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src={account} alt="facebook" className="object-cover" />
+          <div className="flex items-center gap-1">
+            {
+              listOfAccounts?.data?.facebook?.slice(0, 4)?.map((account, i) => (
+                <CustomTooltip key={i} message={account?.title}>
+                <div className=" object-cover relative cursor-pointer group">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200">
+                  <Image src={account?.image } alt="facebook" width={40} height={40} className="object-cover" />
+                </div>
+                 {/* cross icon  */}
+                  <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-200 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
+                  <MultiplicationSignIcon className={"z-20"} size={14} strokeWidth={2} />
+                </div>
               </div>
-              {/* cross icon  */}
-              <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-100 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
-                <MultiplicationSignIcon
-                  className={"z-20"}
-                  size={14}
-                  strokeWidth={2}
-                />
-              </div>
-              {/* facebook icon */}
-              <FacebookIcon
-                className={"z-20 absolute bottom-0 right-0"}
-                width={16}
-                height={16}
-              />
-            </div>
-            <div className=" object-cover relative cursor-pointer group">
-              <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src={account} alt="facebook" className="object-cover" />
-              </div>
-              {/* cross icon  */}
-              <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-100 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
-                <MultiplicationSignIcon
-                  className={"z-20"}
-                  size={14}
-                  strokeWidth={2}
-                />
-              </div>
-              {/* facebook icon */}
-              <FacebookIcon
-                className={"z-20 absolute bottom-0 right-0"}
-                width={16}
-                height={16}
-              />
-            </div>
+                </CustomTooltip>              
+              ))
+            }   
+            {
+              listOfAccounts?.data?.facebook?.length > 4 && (
+                <div onClick={() => {
+                  setOpen(true)
+                  setSelectedAccounts(listOfAccounts?.data?.facebook)
+                  }} className="text-xs text-neutral-600 h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center">
+                  +{listOfAccounts?.data?.facebook?.length - 4}
+                </div>
+              )
+            }        
           </div>
         </div>
         {/* youtube accounts  */}
@@ -108,54 +97,92 @@ const ConnectSocialMedia = () => {
             handleYoutube={handleYoutube}
             className={"cursor-pointer"}
           />
-          <div className="flex items-center gap-2">
-            <div className=" object-cover relative cursor-pointer group">
-              <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src={account} alt="facebook" className="object-cover" />
-              </div>
-              {/* cross icon  */}
-              <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-100 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
-                <MultiplicationSignIcon
-                  className={"z-20"}
-                  size={14}
-                  strokeWidth={2}
-                />
-              </div>
-              {/* facebook icon */}
-              <div className="z-20 absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                <YoutubeIcon className={""} width={16} height={16} />
-              </div>
-            </div>
+          <div className="flex items-center gap-1">
+            {
+              listOfAccounts?.data?.youtube?.slice(0, 4)?.map((account, i) => (
+                <CustomTooltip key={i} message={account?.title}>
+                <div className=" object-cover relative cursor-pointer group">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200">
+                    <Image src={account?.image } alt="youtube" width={40} height={40} className="object-cover" />
+                  </div>
+                  {/* cross icon  */}
+                  <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-200 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
+                    <MultiplicationSignIcon className={"z-20"} size={14} strokeWidth={2} />
+                  </div>
+                </div>
+                </CustomTooltip>
+              ))
+            }
+            {
+              listOfAccounts?.data?.youtube?.length > 4 && (
+                <div onClick={() => {
+                  setOpen(true)
+                  setSelectedAccounts(listOfAccounts?.data?.youtube)
+                }} className="text-xs text-neutral-600 h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center">
+                  +{listOfAccounts?.data?.youtube?.length - 4}
+                </div>
+              )
+            }
           </div>
         </div>
         {/* instagram accounts  */}
         <div className="flex items-center justify-between gap-3">
           <InstagramButton className={"cursor-pointer"} />
           <div className="flex items-center gap-2">
-            <div className=" object-cover relative cursor-pointer group">
-              <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src={account} alt="facebook" className="object-cover" />
-              </div>
-              {/* cross icon  */}
-              <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-100 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
-                <MultiplicationSignIcon
-                  className={"z-20"}
-                  size={14}
-                  strokeWidth={2}
-                />
-              </div>
-              {/* facebook icon */}
-              <div className="z-20 absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
-                <InstagramIcon className={""} width={16} height={16} />
-              </div>
-            </div>
+            {
+              listOfAccounts?.data?.instagram?.slice(0, 4)?.map((account, i) => (
+                <CustomTooltip key={i} message={account?.title}>
+                <div className=" object-cover relative cursor-pointer group">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200">
+                    <Image src={account?.image } alt="instagram" width={40} height={40} className="object-cover" />
+                  </div>
+                  {/* cross icon  */}
+                  <div className="absolute -top-1 -right-1 cursor-pointer bg-slate-200 hover:bg-slate-200 rounded-full p-0.5 group-hover:block hidden">
+                    <MultiplicationSignIcon className={"z-20"} size={14} strokeWidth={2} />
+                  </div>
+                </div>
+                </CustomTooltip>
+              ))
+            }
+            {
+              listOfAccounts?.data?.instagram?.length > 4 && (
+                <div onClick={() => {
+                  setOpen(true)
+                  setSelectedAccounts(listOfAccounts?.data?.instagram)
+                }} className="text-xs text-neutral-600 h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center">
+                  +{listOfAccounts?.data?.instagram?.length - 4}
+                </div>
+              )
+            }
           </div>
         </div>
         {/* tiktok accounts  */}
         <div className="flex items-center justify-between">
           <TiktokButton />
+          <div className="flex items-center gap-2">
+            {listOfAccounts?.data?.tiktok?.slice(0, 4)?.map((account, i) => (
+              <CustomTooltip key={i} message={account?.title}>
+                <div className=" object-cover relative cursor-pointer group">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-slate-200">
+                    <Image src={account?.image } alt="tiktok" width={40} height={40} className="object-cover" />
+                  </div>
+                </div>
+              </CustomTooltip>
+            ))}
+            {
+              listOfAccounts?.data?.tiktok?.length > 4 && (
+                <div onClick={() => {
+                  setOpen(true)
+                  setSelectedAccounts(listOfAccounts?.data?.tiktok)
+                }} className="text-xs text-neutral-600 h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center">
+                  +{listOfAccounts?.data?.tiktok?.length - 4}
+                </div>
+              )
+            }
+          </div>
         </div>
       </div>
+      <ModalforListOfAccount open={open} setOpen={setOpen} data={selectedAccounts} />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 
@@ -13,6 +14,7 @@ const CustomInput = ({
   value,
   defaultValue,
   inputClass,
+  labelClass,
   inputProps = {},
   ...props
 }) => {
@@ -28,7 +30,10 @@ const CustomInput = ({
   return (
     <div className={`${className} flex flex-col gap-1.5`}>
       {label && (
-        <label htmlFor={id} className="text-neutral-600 text-sm font-medium ">
+        <label
+          htmlFor={id}
+          className={cn("text-neutral-600 text-sm font-medium ", labelClass)}
+        >
           {label}
           {required && <span className="text-red-600">*</span>}
         </label>

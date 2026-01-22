@@ -64,12 +64,12 @@ const DashboardProfileDropdown = () => {
           <button
             onClick={handleLogout}
             disabled={isLoading}
-            className="flex items-center gap-2 cursor-pointer group w-full"
+            className="flex items-center gap-2 cursor-pointer group w-full bg-red-100 hover:!bg-red-200 hover:!text-red-700 transition-all duration-300"
           >
             <Logout05Icon
               size={16}
               strokeWidth={2}
-              className="group-hover:!text-brand-700"
+              className="group-hover:!text-red-700"
             />{" "}
             Logout
           </button>

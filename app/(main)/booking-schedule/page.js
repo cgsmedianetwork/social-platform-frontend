@@ -37,9 +37,6 @@ const page = () => {
       <div className="w-full custom-container flex items-center justify-between mt-4">
         <h1 className="text-lg font-semibold mt-4">Schedule Meeting</h1>
         <RequestMeeting />
-        {/* <button className="flex items-center gap-1 px-3 py-2 bg-brand-500 rounded-md text-sm font-semibold">
-          <Plus size={18} strokeWidth={2.5} /> Book a new meeting
-        </button> */}
       </div>
       <div className="w-full custom-container">
         <div className=" w-full border mt-8 mb-12 rounded-lg">

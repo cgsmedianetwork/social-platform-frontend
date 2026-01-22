@@ -24,8 +24,22 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    getListOfAccounts: builder.query({
+      query: () =>{
+        return {
+          url: "/social-connection/list-of-accounts",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      },
+      providesTags: ["socialConnection"],
+    })
+    
   }),
 });
 
-export const { useConnectYoutubeMutation, useConnectFacebookMutation } =
+export const { useConnectYoutubeMutation, useConnectFacebookMutation, useGetListOfAccountsQuery } =
   socialConnectionApiSlice;

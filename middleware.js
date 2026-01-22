@@ -7,7 +7,13 @@ export async function middleware(request) {
   //   console.log("backendUrl", backendUrl);
 
   const publicRoutes = ["/"];
-  const authRoutes = ["/login", "/signup", "/forgot-password", "/verify"];
+  const authRoutes = [
+    "/login",
+    "/signup",
+    "/forgot-password",
+    "/verify",
+    "/stepper",
+  ];
 
   const isPublicRoute = publicRoutes.includes(pathname);
   const isAuthRoute = authRoutes.includes(pathname);
@@ -71,6 +77,17 @@ export async function middleware(request) {
         const userRole = data?.data?.role;
         // console.log(response.ok, userRole, data);
 
+        // Shared routes accessible by both admin and user
+        const sharedRoutes = ["/profile"];
+        const isSharedRoute = sharedRoutes.some((route) =>
+          pathname.startsWith(route)
+        );
+
+        // If accessing a shared route, allow access regardless of role
+        if (isSharedRoute) {
+          return NextResponse.next();
+        }
+
         const adminRoutes = [
           "/home",
           "/admin-dashboard",
@@ -78,20 +95,14 @@ export async function middleware(request) {
           "/settings",
           "/sub-admin",
           "/users",
-          "/profile",
           "/user",
         ];
-        const userRoutes = [
-          "/dashboard",
-          "/profile",
-          "/booking-schedule",
-          "/stepper",
-        ];
-
-        const isAdminRoute = adminRoutes.some((route) =>
+        const userRoutes = ["/dashboard", "/booking-schedule", "/stepper"];
+        const isUserRoute = userRoutes.some((route) =>
           pathname.startsWith(route)
         );
-        const isUserRoute = userRoutes.some((route) =>
+
+        const isAdminRoute = adminRoutes.some((route) =>
           pathname.startsWith(route)
         );
 

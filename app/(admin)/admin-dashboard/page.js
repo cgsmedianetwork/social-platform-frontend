@@ -20,6 +20,8 @@ const AdminDashboardPage = () => {
             followers={1000}
             engagement={288}
             impressions={"20.8k"}
+            // facebook coror
+            color={"#1877F2"}
           />
           <AnalyticsReportCard
             icon={<YoutubeIcon />}
@@ -27,6 +29,7 @@ const AdminDashboardPage = () => {
             followers={900}
             engagement={200}
             impressions={"15.5k"}
+            color={"#FF0000"}
           />
           <AnalyticsReportCard
             icon={<InstagramIcon />}
@@ -34,6 +37,7 @@ const AdminDashboardPage = () => {
             followers={800}
             engagement={188}
             impressions={"12.5k"}
+            color={"#C13584"}
           />
           <AnalyticsReportCard
             icon={<TikTokIcon />}
@@ -41,6 +45,7 @@ const AdminDashboardPage = () => {
             followers={700}
             engagement={150}
             impressions={"10.2k"}
+            color={"#000000"}
           />
         </div>
       </div>
