@@ -6,7 +6,7 @@ import { GridPattern } from "../ui/grid-pattern";
 
 const CallToAction = () => {
   return (
-    <section className="pb-28 bg-neutral-50 ">
+    <section className="pb-14 sm:pb-28 bg-neutral-50 px-3">
       <div className="max-w-4xl mx-auto rounded-2xl p-12 relative ">
         <GridPattern
           x={-30}
@@ -21,7 +21,7 @@ const CallToAction = () => {
             [2, 2],
           ]}
           className={cn(
-            "[mask-image:linear-gradient(to_bottom_right,white,transparent)] -z-0"
+            "[mask-image:linear-gradient(to_bottom_right,white,transparent)] -z-0",
           )}
         />
         <div className="bg-brand-400/40 absolute inset-0 rounded-2xl"></div>
@@ -31,7 +31,9 @@ const CallToAction = () => {
             "Join a friendly platform where your social growth actually makes sense — and finally starts working."
           }
           className={"relative z-10 ]"}
-          titleClass={"text-center text-6xl leading-16 max-w-xl mx-auto"}
+          titleClass={
+            "text-center text-3xl sm:text-6xl md:leading-16 max-w-xl mx-auto"
+          }
           descriptionClass={"text-center text-lg max-w-xl mx-auto mt-3"}
         />
         <div className="flex justify-center">

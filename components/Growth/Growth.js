@@ -6,7 +6,7 @@ import Header from "../Header/Header";
 
 const GrowthSection = () => {
   return (
-    <section className="custom-container py-16 pb-28">
+    <section className="custom-container py-10 sm:py-16 pb-14 sm:pb-28">
       <Header
         title={"Simple Steps to Smarter Growth"}
         titleClass={"text-center max-w-2xl mx-auto "}
@@ -15,8 +15,8 @@ const GrowthSection = () => {
         }
         descriptionClass={"max-w-xl mt-2 mx-auto"}
       />
-      <div className="grid grid-cols-3 gap-4 mt-12">
-        <div className="bg-neutral-100/60 rounded-lg p-6 flex flex-col gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
+        <div className="bg-neutral-100/60 rounded-lg p-8 flex flex-col gap-5">
           <div className="bg-white shadow-2xl rounded-full p-4 mx-auto">
             <ConnectIcon width={35} height={35} />
           </div>
@@ -27,7 +27,7 @@ const GrowthSection = () => {
             Egestas elit dui scelerisque ut eu purus aliquam vitae habitasse.
           </p>
         </div>
-        <div className="bg-neutral-100/60 rounded-lg p-6 flex flex-col gap-5">
+        <div className="bg-neutral-100/60 rounded-lg p-8 flex flex-col gap-5">
           <div className="bg-white shadow-2xl rounded-full p-4 mx-auto">
             <DashboardIcon width={35} height={35} />
           </div>
@@ -39,7 +39,7 @@ const GrowthSection = () => {
             more.
           </p>
         </div>
-        <div className="bg-neutral-100/60 rounded-lg p-6 flex flex-col gap-5">
+        <div className="bg-neutral-100/60 rounded-lg p-8 flex flex-col gap-5">
           <div className="bg-white shadow-2xl rounded-full p-4 mx-auto">
             <GuidanceIcon width={35} height={35} />
           </div>

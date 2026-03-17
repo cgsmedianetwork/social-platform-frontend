@@ -3,10 +3,10 @@ import { apiSlice } from "@/Redux/BaseApi/BaseApi";
 export const socialConnectionApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     connectYoutube: builder.mutation({
-      query: (data) => {
+      query: () => {
         return {
           url: "/social-connection/youtube/connect",
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -14,10 +14,33 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
       },
     }),
     connectFacebook: builder.mutation({
-      query: (data) => {
+      query: () => {
         return {
           url: "/social-connection/facebook/connect",
-          method: "GET",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+    connectInstagram: builder.mutation({
+      query: () => {
+        return {
+          url: "/social-connection/instagram/connect",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+
+    connectTiktok: builder.mutation({
+      query: () => {
+        return {
+          url: "/social-connection/tiktok/connect",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -41,5 +64,5 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useConnectYoutubeMutation, useConnectFacebookMutation, useGetListOfAccountsQuery } =
+export const { useConnectYoutubeMutation, useConnectFacebookMutation, useConnectInstagramMutation, useGetListOfAccountsQuery , useConnectTiktokMutation} =
   socialConnectionApiSlice;

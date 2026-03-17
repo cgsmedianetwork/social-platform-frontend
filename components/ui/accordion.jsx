@@ -26,14 +26,14 @@ function AccordionTrigger({ className, children, ...props }) {
         data-slot="accordion-trigger"
         className={cn(
           "focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>p]:rotate-135",
-          className
+          className,
         )}
         {...props}
       >
         {children}
 
-        <p className="translate-y-0 transition-transform duration-200 bg-neutral-100 p-3 rounded-full">
-          <PlusIcon className="text-muted-foreground pointer-events-none size-5 shrink-0  translate-y-0 transition-transform duration-200 " />
+        <p className="translate-y-0 transition-transform duration-200 bg-neutral-100 p-2 sm:p-3 rounded-full">
+          <PlusIcon className="text-muted-foreground pointer-events-none size-4 md:size-5 shrink-0  translate-y-0 transition-transform duration-200 " />
         </p>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

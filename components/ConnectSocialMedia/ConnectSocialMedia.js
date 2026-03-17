@@ -1,12 +1,16 @@
 "use client";
 import {
   useConnectFacebookMutation,
+  useConnectInstagramMutation,
+  useConnectTiktokMutation,
   useConnectYoutubeMutation,
   useGetListOfAccountsQuery,
 } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { MultiplicationSignIcon } from "hugeicons-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import {
   FacebookButton,
   InstagramButton,
@@ -18,35 +22,73 @@ import CustomTooltip from "../CustomTooltip/CustomTooltip";
 
 const ConnectSocialMedia = () => {
   const [open, setOpen] = useState(false);
+  const params = useSearchParams()
+  const error = params.get("error")
+  // console.log(error);
   const [selectedAccounts, setSelectedAccounts] = useState([]);
   const [connectYoutube, { isLoading }] = useConnectYoutubeMutation();
   const {data: listOfAccounts, isLoading: isLoadingListOfAccounts} = useGetListOfAccountsQuery()
   // console.log(listOfAccounts);
   const [connectFacebook, { isLoading: isLoadingFacebook }] =
     useConnectFacebookMutation();
+  const [connectInstagram, {isLoading: isLoadingInstagram}] = useConnectInstagramMutation()
+  const [connectTiktok, {isLoading: isLoadingTiktok}] = useConnectTiktokMutation()
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   const handleYoutube = async () => {
     try {
       const response = await connectYoutube({});
-      console.log(response);
-      if (response?.data?.url) {
-        window.location.href = response?.data?.url;
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-    }
-  };
-  const handleFacebook = async () => {
-    try {
-      const response = await connectFacebook({});
       // console.log(response);
       if (response?.data?.url) {
         window.location.href = response?.data?.url;
       }
     } catch (error) {
       console.log(error);
+      toast.error("Failed to connect to Youtube");
+    } 
+  };
+  const handleFacebook = async () => {
+    try {
+      const response = await connectFacebook({});
+      console.log(response);
+      if (response?.data?.url) {
+        window.location.href = response?.data?.url;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to connect to Facebook");
     }
   };
+  const handleInstagram = async () => {
+    try {
+      const response = await connectInstagram({});
+      // console.log(response);
+      if (response?.data?.url) {
+        window.location.href = response?.data?.url;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to connect to Instagram");
+    }
+  };
+  const handleTiktok = async () => {
+    try {
+      const response = await connectTiktok({});
+      console.log(response);
+      if (response?.data?.url) {
+        window.location.href = response?.data?.url;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to connect to Tiktok");
+    }
+  };
+  
   return (
     <div className="">
       <h2 className="text-xl font-semibold text-neutral-900 text-center">
@@ -127,7 +169,7 @@ const ConnectSocialMedia = () => {
         </div>
         {/* instagram accounts  */}
         <div className="flex items-center justify-between gap-3">
-          <InstagramButton className={"cursor-pointer"} />
+          <InstagramButton handleInstagram={handleInstagram} className={"cursor-pointer"} />
           <div className="flex items-center gap-2">
             {
               listOfAccounts?.data?.instagram?.slice(0, 4)?.map((account, i) => (
@@ -158,7 +200,7 @@ const ConnectSocialMedia = () => {
         </div>
         {/* tiktok accounts  */}
         <div className="flex items-center justify-between">
-          <TiktokButton />
+          <TiktokButton handleTiktok={handleTiktok} className={"cursor-pointer"}/>
           <div className="flex items-center gap-2">
             {listOfAccounts?.data?.tiktok?.slice(0, 4)?.map((account, i) => (
               <CustomTooltip key={i} message={account?.title}>

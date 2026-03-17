@@ -57,7 +57,7 @@ const ProfileHeader = () => {
                 alt="logo"
                 width={96}
                 height={96}
-                loading="lazy"
+                loading="lazy"                
                 className="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
               />
               <label

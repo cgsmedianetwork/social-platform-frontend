@@ -1,6 +1,7 @@
 "use client";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid } from "recharts";
+import NumberFlowComponent from "../NumberFlow/NumberFlowComponent";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 
 const DashboardCard = () => {
@@ -45,10 +46,11 @@ const DashboardCard = () => {
   };
   return (
     <div className="grid grid-cols-3 gap-5 py-6">
+      {/* card 1 */}
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Reach</p>
-          <p className="text-3xl font-semibold mt-5">202</p>
+          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={202} /></p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-green-700 text-xs">
               <ArrowUp size={16} strokeWidth={2.5} className="text-green-600" />{" "}
@@ -103,7 +105,7 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Like</p>
-          <p className="text-3xl font-semibold mt-5">529</p>
+          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={529} /></p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-chart-4 text-xs">
               <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}
@@ -157,7 +159,7 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Comments</p>
-          <p className="text-3xl font-semibold mt-5">00</p>
+          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={100} /></p>
           <p className="flex items-center gap-2 mt-4">
             <span className="flex items-center gap-0.5 text-chart-4 text-xs">
               <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}

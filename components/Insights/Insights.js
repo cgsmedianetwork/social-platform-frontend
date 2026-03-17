@@ -9,7 +9,7 @@ const Insights = () => {
   return (
     <div className="relative overflow-hidden">
       <div className="absolute top-0 right-0 h-full w-[50%]  rotate-12 bg-blue-400 pointer-events-none rounded-full opacity-40 blur-[80px] -z-20"></div>
-      <div className=" relative py-36">
+      <div className=" relative py-14 sm:py-36">
         <GridPattern
           x={-10}
           y={-10}
@@ -23,18 +23,18 @@ const Insights = () => {
             [7, 2],
           ]}
           className={cn(
-            "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)] -z-30 "
+            "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)] -z-30 ",
           )}
         />
 
-        <div className="flex items-center gap-8 custom-container">
-          <div className="w-[40%] ">
+        <div className="flex flex-col sm:flex-row items-center gap-14 sm:gap-8 custom-container">
+          <div className="w-full sm:w-[40%] ">
             <Header
               title={"Your Insights — All in One Clean, Easy View"}
               description={
                 "Track your progress without the overwhelm. See how your posts are doing, what’s growing, and where to focus next."
               }
-              titleClass={"text-left text-5xl leading-14"}
+              titleClass={"text-left text-3xl sm:text-5xl sm:leading-14"}
               descriptionClass={"text-left mt-4 text-lg"}
             />
           </div>

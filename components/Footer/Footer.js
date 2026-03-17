@@ -1,3 +1,4 @@
+import { TiktokIcon } from "hugeicons-react";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -5,13 +6,13 @@ import {
   Mail,
   MapPin,
   Phone,
-  TwitterIcon,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../Assets/logo.webp";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-neutral-950">
       <div className="custom-container ">
@@ -23,22 +24,34 @@ const Footer = () => {
               expert guidance — all in one friendly place.
             </p>
             <div className="flex gap-5 text-neutral-200">
-              <Link href="/">
-                <LinkedinIcon size={20} />
-              </Link>
-              <Link href="/">
+              <Link
+                href="https://www.facebook.com/cgsmedianetwork"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FacebookIcon size={20} />
               </Link>
-              <Link href="/">
-                <TwitterIcon size={20} />
+              <Link
+                href="https://www.tiktok.com/@cgs_media_network"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <TiktokIcon size={22} />
+              </Link>
+              <Link
+                href="https://www.instagram.com/cgs_media_network"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramIcon size={20} />
               </Link>
               <Link href="/">
-                <InstagramIcon size={20} />
+                <LinkedinIcon size={20} />
               </Link>
             </div>
           </div>
           <div className=" flex gap-16">
-            <div className="flex flex-col gap-3 text-neutral-200 text-sm py-2">
+            {/* <div className="flex flex-col gap-3 text-neutral-200 text-sm py-2">
               <p className="font-sans text-lg font-semibold text-white">
                 Product
               </p>
@@ -46,7 +59,7 @@ const Footer = () => {
               <p>How It Works </p>
               <p>Reviews</p>
               <p>Updates</p>
-            </div>
+            </div> */}
             <div className="flex flex-col gap-3 text-neutral-200 text-sm py-2">
               <p className="font-sans text-lg font-semibold text-white">
                 Company
@@ -60,9 +73,9 @@ const Footer = () => {
               <p className="font-sans text-lg font-semibold text-white">
                 Support
               </p>
-              <p className="mt-3.5">Getting started</p>
+              {/* <p className="mt-3.5">Getting started</p> */}
               <p>Help center</p>
-              <p>FAQs</p>
+              <Link href="#faq">FAQs</Link>
               <p>Contact us</p>
             </div>
             <div className="flex flex-col gap-3 text-neutral-200 text-sm py-2">
@@ -84,11 +97,11 @@ const Footer = () => {
         </div>
         <div className="border-t border-neutral-700 py-6 flex justify-between items-center">
           <p className="text-neutral-100 text-sm">
-            Copyright © 2025 BRIX Templates
+            Copyright © {currentYear} CGS Media Network
           </p>
           <div className="flex items-center gap-2 text-sm text-neutral-200">
-            <p>All Rights Reserved</p>
-            <div className="border-l h-4"></div>
+            {/* <p>All Rights Reserved</p>
+            <div className="border-l h-4"></div> */}
             <p>Terms and Conditions</p>
             <div className="border-l h-4"></div>
             <p>Privacy Policy</p>
