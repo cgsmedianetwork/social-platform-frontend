@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Tailwind v4 + shadcn tokens */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

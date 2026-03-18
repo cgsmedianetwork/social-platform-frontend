@@ -10,7 +10,7 @@ import {
 
 const FAQ = () => {
   return (
-    <section className="py-14 sm:py-28 bg-neutral-50">
+    <section id="faq" className="py-14 sm:py-28 bg-neutral-50">
       <div className="custom-container">
         <Header
           title={"Frequently Asked Questions"}

@@ -3,7 +3,7 @@ import TestimonialSlider from "./TestimonialSlider";
 
 const Testimonial = () => {
   return (
-    <div className="w-full custom-container py-14 sm:py-24 ">
+    <div id="testimonial" className="w-full custom-container py-14 sm:py-24 ">
       <Header
         title={"Loved by people who just wanted Real help"}
         description={

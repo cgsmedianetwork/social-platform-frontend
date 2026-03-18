@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 
 const HeroTwo = () => {
   return (
-    <div className="w-full bg-brand-950 py-14 sm:py-28 px-3">
+    <div id="features" className="w-full bg-brand-950 py-14 sm:py-28 px-3">
       <div className="custom-container">
         <Header
           title={"Your Social Media, Finally Made Simple"}
