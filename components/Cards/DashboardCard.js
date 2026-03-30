@@ -1,10 +1,14 @@
 "use client";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import TrendIndicator from "@/helper/TrendIndicator";
+import { useGetReachLikeCommentLastTwoMonthsDataQuery } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { Area, AreaChart, CartesianGrid } from "recharts";
 import NumberFlowComponent from "../NumberFlow/NumberFlowComponent";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 
 const DashboardCard = () => {
+  const { data, isLoading, isError } =
+    useGetReachLikeCommentLastTwoMonthsDataQuery();
+  console.log(data);
   const description = "A simple area chart";
   const chartData = [
     { month: "January", reach: 0 },
@@ -50,12 +54,16 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Reach</p>
-          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={202} /></p>
+          <p className="text-3xl font-semibold mt-5">
+            <NumberFlowComponent
+              value={data?.data?.combined?.total?.views || 0}
+            />
+          </p>
           <p className="flex items-center gap-2 mt-4">
-            <span className="flex items-center gap-0.5 text-green-700 text-xs">
-              <ArrowUp size={16} strokeWidth={2.5} className="text-green-600" />{" "}
-              5%{" "}
-            </span>
+            <TrendIndicator
+              percentage={data?.data?.combined?.trends?.views?.percentage}
+              direction={data?.data?.combined?.trends?.views?.direction}
+            />
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>
@@ -104,13 +112,17 @@ const DashboardCard = () => {
       </div>
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
-          <p className="text-neutral-950 text-base font-semibold">Like</p>
-          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={529} /></p>
+          <p className="text-neutral-950 text-base font-semibold">Reactions</p>
+          <p className="text-3xl font-semibold mt-5">
+            <NumberFlowComponent
+              value={data?.data?.combined?.total?.likes || 0}
+            />
+          </p>
           <p className="flex items-center gap-2 mt-4">
-            <span className="flex items-center gap-0.5 text-chart-4 text-xs">
-              <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}
-              85%{" "}
-            </span>
+            <TrendIndicator
+              percentage={data?.data?.combined?.trends?.likes?.percentage}
+              direction={data?.data?.combined?.trends?.likes?.direction}
+            />
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>
@@ -159,12 +171,16 @@ const DashboardCard = () => {
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Comments</p>
-          <p className="text-3xl font-semibold mt-5"><NumberFlowComponent value={100} /></p>
+          <p className="text-3xl font-semibold mt-5">
+            <NumberFlowComponent
+              value={data?.data?.combined?.total?.comments || 0}
+            />
+          </p>
           <p className="flex items-center gap-2 mt-4">
-            <span className="flex items-center gap-0.5 text-chart-4 text-xs">
-              <ArrowDown size={16} strokeWidth={2.5} className="text-chart-4" />{" "}
-              00%{" "}
-            </span>
+            <TrendIndicator
+              percentage={data?.data?.combined?.trends?.comments?.percentage}
+              direction={data?.data?.combined?.trends?.comments?.direction}
+            />
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>

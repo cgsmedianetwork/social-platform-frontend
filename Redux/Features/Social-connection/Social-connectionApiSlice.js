@@ -12,6 +12,7 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
           },
         };
       },
+      invalidatesTags: ["socialConnection"],
     }),
     connectFacebook: builder.mutation({
       query: () => {
@@ -23,6 +24,7 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
           },
         };
       },
+      invalidatesTags: ["socialConnection"],
     }),
     connectInstagram: builder.mutation({
       query: () => {
@@ -34,8 +36,8 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
           },
         };
       },
+      invalidatesTags: ["socialConnection"],
     }),
-
     connectTiktok: builder.mutation({
       query: () => {
         return {
@@ -46,23 +48,40 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
           },
         };
       },
+      invalidatesTags: ["socialConnection"],
     }),
-
     getListOfAccounts: builder.query({
-      query: () =>{
+      query: () => {
         return {
           url: "/social-connection/list-of-accounts",
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        };
       },
       providesTags: ["socialConnection"],
-    })
-    
+    }),
+    getReachLikeCommentLastTwoMonthsData: builder.query({
+      query: () => {
+        return {
+          url: "/social-connection/reach-like-comment-last-two-months-data",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      providesTags: ["socialConnection"],
+    }),
   }),
 });
 
-export const { useConnectYoutubeMutation, useConnectFacebookMutation, useConnectInstagramMutation, useGetListOfAccountsQuery , useConnectTiktokMutation} =
-  socialConnectionApiSlice;
+export const {
+  useConnectYoutubeMutation,
+  useConnectFacebookMutation,
+  useConnectInstagramMutation,
+  useGetListOfAccountsQuery,
+  useConnectTiktokMutation,
+  useGetReachLikeCommentLastTwoMonthsDataQuery,
+} = socialConnectionApiSlice;
