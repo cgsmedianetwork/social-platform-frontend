@@ -1,6 +1,10 @@
 "use client";
+import getChartColor from "@/helper/getChartColor";
 import TrendIndicator from "@/helper/TrendIndicator";
-import { useGetReachLikeCommentLastTwoMonthsDataQuery } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
+import {
+  useGetLast12MonthsChartDataQuery,
+  useGetReachLikeCommentLastTwoMonthsDataQuery,
+} from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { Area, AreaChart, CartesianGrid } from "recharts";
 import NumberFlowComponent from "../NumberFlow/NumberFlowComponent";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
@@ -8,46 +12,29 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 const DashboardCard = () => {
   const { data, isLoading, isError } =
     useGetReachLikeCommentLastTwoMonthsDataQuery();
-  console.log(data);
-  const description = "A simple area chart";
-  const chartData = [
-    { month: "January", reach: 0 },
-    { month: "February", reach: 20 },
-    { month: "March", reach: 50 },
-    { month: "April", reach: 40 },
-    { month: "May", reach: 80 },
-    { month: "June", reach: 90 },
-    { month: "July", reach: 80 },
-    { month: "August", reach: 140 },
-    { month: "September", reach: 200 },
-    { month: "October", reach: 180 },
-    { month: "November", reach: 240 },
-  ];
-  const chartData2 = [
-    { month: "August", like: 140 },
-    { month: "September", like: 200 },
-    { month: "October", like: 180 },
-    { month: "November", like: 240 },
-    { month: "June", like: 90 },
-    { month: "July", like: 80 },
-    { month: "May", like: 80 },
-    { month: "April", like: 40 },
-    { month: "March", like: 50 },
-    { month: "February", like: 20 },
-    { month: "January", like: 0 },
-  ];
-  const chartConfig = {
-    reach: {
-      label: "Reach",
-      color: "var(--chart-2)",
-    },
+  const { data: chartDataResponse } = useGetLast12MonthsChartDataQuery();
+  // console.log(chartDataResponse);
+  const chartDataLast12Months = chartDataResponse?.data || [];
+  console.log(chartDataLast12Months);
+  const trends = data?.data?.combined?.trends;
+
+  console.log(trends);
+  const reachColor = getChartColor(trends?.views?.direction);
+  const likesColor = getChartColor(trends?.likes?.direction);
+  const commentsColor = getChartColor(trends?.comments?.direction);
+  console.log(reachColor, likesColor, commentsColor);
+
+  // Dynamic chart configs
+  const reachChartConfig = {
+    reach: { label: "Reach", color: reachColor },
   };
-  const chartConfig2 = {
-    reach: {
-      label: "Like",
-      color: "var(--chart-4)",
-    },
+  const likesChartConfig = {
+    like: { label: "Reactions", color: likesColor },
   };
+  const commentsChartConfig = {
+    comment: { label: "Comments", color: commentsColor },
+  };
+
   return (
     <div className="grid grid-cols-3 gap-5 py-6">
       {/* card 1 */}
@@ -68,8 +55,8 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer config={chartConfig} className={"w-full h-full"}>
-            <AreaChart accessibilityLayer data={chartData}>
+          <ChartContainer config={reachChartConfig} className={"w-full h-full"}>
+            <AreaChart accessibilityLayer data={chartDataLast12Months}>
               <CartesianGrid vertical={false} horizontal={false} />
 
               <ChartTooltip
@@ -110,6 +97,7 @@ const DashboardCard = () => {
           </ChartContainer>
         </div>
       </div>
+      {/* card 2  */}
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Reactions</p>
@@ -127,8 +115,8 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer config={chartConfig2} className={"w-full h-full"}>
-            <AreaChart accessibilityLayer data={chartData2}>
+          <ChartContainer config={likesChartConfig} className={"w-full h-full"}>
+            <AreaChart accessibilityLayer data={chartDataLast12Months}>
               <CartesianGrid vertical={false} horizontal={false} />
               <ChartTooltip
                 cursor={true}
@@ -146,12 +134,12 @@ const DashboardCard = () => {
                 <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
-                    stopColor="var(--color-chart-4)"
+                    stopColor="var(--color-like)"
                     stopOpacity={0.7}
                   />
                   <stop
                     offset="95%"
-                    stopColor="var(--color-chart-4)"
+                    stopColor="var(--color-like)"
                     stopOpacity={0}
                   />
                 </linearGradient>
@@ -161,13 +149,14 @@ const DashboardCard = () => {
                 type="natural"
                 fill="url(#chart-like)"
                 fillOpacity={0.4}
-                stroke="var(--color-chart-4)"
+                stroke="var(--color-like)"
                 strokeWidth={2}
               />
             </AreaChart>
           </ChartContainer>
         </div>
       </div>
+      {/* card 3  */}
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
           <p className="text-neutral-950 text-base font-semibold">Comments</p>
@@ -185,8 +174,11 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer config={chartConfig2} className={"w-full h-full"}>
-            <AreaChart accessibilityLayer data={chartData2}>
+          <ChartContainer
+            config={commentsChartConfig}
+            className={"w-full h-full"}
+          >
+            <AreaChart accessibilityLayer data={chartDataLast12Months}>
               <CartesianGrid vertical={false} horizontal={false} />
               <ChartTooltip
                 cursor={true}
@@ -204,22 +196,22 @@ const DashboardCard = () => {
                 <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
-                    stopColor="var(--color-chart-4)"
+                    stopColor="var(--color-comment)"
                     stopOpacity={0.7}
                   />
                   <stop
                     offset="95%"
-                    stopColor="var(--color-chart-4)"
+                    stopColor="var(--color-comment)"
                     stopOpacity={0}
                   />
                 </linearGradient>
               </defs>
               <Area
-                dataKey="like"
+                dataKey="comment"
                 type="natural"
                 fill="url(#chart-like)"
                 fillOpacity={0.4}
-                stroke="var(--color-chart-4)"
+                stroke="var(--color-comment)"
                 strokeWidth={2}
               />
             </AreaChart>

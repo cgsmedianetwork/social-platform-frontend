@@ -74,6 +74,18 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["socialConnection"],
     }),
+    getLast12MonthsChartData: builder.query({
+      query: () => {
+        return {
+          url: "/social-connection/last-12-months-chart-data",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      providesTags: ["socialConnection"],
+    }),
   }),
 });
 
@@ -84,4 +96,5 @@ export const {
   useGetListOfAccountsQuery,
   useConnectTiktokMutation,
   useGetReachLikeCommentLastTwoMonthsDataQuery,
+  useGetLast12MonthsChartDataQuery,
 } = socialConnectionApiSlice;
