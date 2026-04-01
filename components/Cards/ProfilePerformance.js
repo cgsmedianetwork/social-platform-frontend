@@ -1,230 +1,156 @@
 "use client";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "../ui/chart";
+import { useGetFollowersLast12MonthsQuery } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
+import { Skeleton } from "../ui/skeleton";
 
 const ProfilePerformance = () => {
-  const description = "An area chart with gradient fill";
-  const chartData = [
-    {
-      month: "January",
-      facebook: 90,
-      youtube: 60,
-      instagram: 90,
-      tiktok: 80,
-    },
-    {
-      month: "February",
-      facebook: 105,
-      youtube: 120,
-      instagram: 150,
-      tiktok: 100,
-    },
-    {
-      month: "March",
-      facebook: 137,
-      youtube: 80,
-      instagram: 110,
-      tiktok: 70,
-    },
-    { month: "April", facebook: 73, youtube: 60, instagram: 80, tiktok: 50 },
-    { month: "May", facebook: 99, youtube: 70, instagram: 90, tiktok: 60 },
-    { month: "June", facebook: 80, youtube: 60, instagram: 110, tiktok: 70 },
-    {
-      month: "July",
-      facebook: 149,
-      youtube: 90,
-      instagram: 130,
-      tiktok: 80,
-    },
-    {
-      month: "August",
-      facebook: 140,
-      youtube: 50,
-      instagram: 100,
-      tiktok: 30,
-    },
-    {
-      month: "September",
-      facebook: 209,
-      youtube: 110,
-      instagram: 170,
-      tiktok: 100,
-    },
-    {
-      month: "October",
-      facebook: 239,
-      youtube: 120,
-      instagram: 110,
-      tiktok: 120,
-    },
-    {
-      month: "November",
-      facebook: 264,
-      youtube: 150,
-      instagram: 140,
-      tiktok: 130,
-    },
-    {
-      month: "December",
-      facebook: 150,
-      youtube: 100,
-      instagram: 120,
-      tiktok: 110,
-    },
-  ];
-  const chartConfig = {
-    facebook: {
-      label: "Facebook",
-      color: "#1877F2",
-    },
-    youtube: {
-      label: "Youtube",
-      color: "#FF0000",
-    },
-    instagram: {
-      label: "Instagram",
-      color: "#8a49a1",
-    },
-    tiktok: {
-      label: "Tiktok",
-      color: "#282C35",
-    },
-  };
+  const {
+    data: followersLast12MonthsResponse,
+    isFetching: isFollowersLast12MonthsFetching,
+  } = useGetFollowersLast12MonthsQuery();
+  // console.log(followersLast12MonthsResponse);
+  const accounts = followersLast12MonthsResponse?.data?.accounts || [];
+  const chartData1 = followersLast12MonthsResponse?.data?.chartData || [];
+  // console.log(accounts);
+  // console.log(chartData1);
+
+  const chartConfig = {};
+  accounts.forEach((acc) => {
+    chartConfig[acc.key] = {
+      label: acc.accountName,
+      // label: `${acc.accountName} (${acc.provider})`,
+      color: acc.color,
+    };
+  });
+  // console.log(chartConfig);
+
+  // if (isFollowersLast12MonthsFetching) {
+  //   return (
+  //     <div className="border rounded-lg p-5 px-7 my-4 mb-12 animate-pulse">
+  //       <div className="h-6 bg-neutral-200 rounded w-1/3 mb-6" />
+  //       <div className="h-[300px] bg-neutral-100 rounded" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="border rounded-lg p-5 px-7 my-4 mb-12">
       <h1 className="text-base font-semibold w-full border-b pb-5 text-neutral-900">
-        Profile Performance - views
+        Profile Performance - Followers
       </h1>
-      <div className="py-8 flex items-center justify-between">
-        <div className="-rotate-90 text-sm text-neutral-500">views</div>
-        <ChartContainer
-          config={chartConfig}
-          className="w-full h-[280px] flex-1  "
-        >
-          <AreaChart
-            accessibilityLayer
-            data={chartData}
-            // margin={{
-            //   left: 20,
-            //   right: 20,
-            // }}
-          >
-            {/* <ChartLegend  /> */}
-            <ChartLegend
+
+      {isFollowersLast12MonthsFetching ? (
+        <Skeleton className="w-full h-[300px] my-4" />
+      ) : (
+        <>
+          {accounts.length > 0 ? (
+            <>
+              <div className="flex items-center gap-2 py-2 ml-auto w-fit flex-wrap">
+                <p className="text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-[#1877F2] inline-block"></span>{" "}
+                  Facebook
+                </p>
+                {/* youtube */}
+                <p className="text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-[#FF0000] inline-block"></span>{" "}
+                  Youtube
+                </p>
+                {/* instagram */}
+                <p className="text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-[#8a49a1] inline-block"></span>{" "}
+                  Instagram
+                </p>
+                {/* tiktok */}
+                <p className="text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-[#282C35] inline-block"></span>{" "}
+                  Tiktok
+                </p>
+              </div>
+              <div className="py-8 flex items-center justify-between gap-0 ">
+                <div className="-rotate-90 text-sm text-neutral-500 -ml-5 ">
+                  Followers
+                </div>
+
+                <ChartContainer
+                  config={chartConfig}
+                  className={"h-[300px] w-full "}
+                >
+                  <LineChart
+                    accessibilityLayer
+                    data={chartData1}
+                    margin={{
+                      left: 14,
+                      right: 5,
+                      top: 10,
+                      bottom: 10,
+                    }}
+                  >
+                    {/* <ChartLegend
               content={<ChartLegendContent />}
               verticalAlign="top"
               // align="right"
               className="justify-end"
-            />
-            <CartesianGrid vertical={false} />
-            <YAxis
-              axisLine={false}
-              tickLine={false}
-              tickCount={5}
-              tickMargin={8}
-              allowDecimals={false}
-              tickFormatter={(value) => value.toLocaleString()}
-            />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <defs>
-              <linearGradient id="fillFacebook" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-facebook)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-facebook)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-              <linearGradient id="fillYoutube" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-youtube)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-youtube)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-              <linearGradient id="fillInstagram" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-instagram)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-instagram)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-              <linearGradient id="fillTiktok" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-tiktok)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-tiktok)"
-                  stopOpacity={0.1}
-                />
-              </linearGradient>
-            </defs>
-            <Area
-              dataKey="facebook"
-              type="natural"
-              fill="url(#fillFacebook)"
-              fillOpacity={0.4}
-              stroke="var(--color-facebook)"
-              stackId="a"
-            />
-            <Area
-              dataKey="youtube"
-              type="natural"
-              fill="url(#fillYoutube)"
-              fillOpacity={0.4}
-              stroke="var(--color-youtube)"
-              stackId="a"
-            />
-            <Area
-              dataKey="instagram"
-              type="natural"
-              fill="url(#fillInstagram)"
-              fillOpacity={0.4}
-              stroke="var(--color-instagram)"
-              stackId="a"
-            />
-            <Area
-              dataKey="tiktok"
-              type="natural"
-              fill="url(#fillTiktok)"
-              fillOpacity={0.4}
-              stroke="var(--color-tiktok)"
-              stackId="a"
-            />
-          </AreaChart>
-        </ChartContainer>
-      </div>
+            /> */}
+                    <CartesianGrid vertical={false} />
+
+                    <XAxis
+                      dataKey="month"
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={8}
+                      tickFormatter={(value) => value.slice(0, 3)}
+                    />
+                    <ChartTooltip
+                      cursor={false}
+                      content={
+                        <ChartTooltipContent
+                          hideLabel
+                          // now tooltip like CYGBYTE (facebook) but not want show bracket and show only CYGBYTE
+                        />
+                      }
+                    />
+
+                    {accounts.map((acc) => (
+                      <Line
+                        key={acc.key}
+                        dataKey={acc.key}
+                        type="bump"
+                        stroke={`var(--color-${acc.key})`}
+                        dot={false}
+                        strokeWidth={2}
+                        // filter="url(#rainbow-line-glow)"
+                      />
+                    ))}
+                    <defs>
+                      <filter
+                        id="rainbow-line-glow"
+                        x="-20%"
+                        y="-20%"
+                        width="140%"
+                        height="140%"
+                      >
+                        <feGaussianBlur stdDeviation="10" result="blur" />
+                        <feComposite
+                          in="SourceGraphic"
+                          in2="blur"
+                          operator="over"
+                        />
+                      </filter>
+                    </defs>
+                  </LineChart>
+                </ChartContainer>
+              </div>
+            </>
+          ) : (
+            <div className="border rounded-lg p-5 px-7 my-4 mb-12">
+              <p className="py-8 text-neutral-500 text-center">
+                No social accounts connected.
+              </p>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

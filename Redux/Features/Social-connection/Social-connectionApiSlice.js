@@ -86,6 +86,18 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["socialConnection"],
     }),
+    getFollowersLast12Months: builder.query({
+      query: () => {
+        return {
+          url: "/social-connection/followers-per-account",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      providesTags: ["socialConnection"],
+    }),
   }),
 });
 
@@ -97,4 +109,5 @@ export const {
   useConnectTiktokMutation,
   useGetReachLikeCommentLastTwoMonthsDataQuery,
   useGetLast12MonthsChartDataQuery,
+  useGetFollowersLast12MonthsQuery,
 } = socialConnectionApiSlice;

@@ -7,22 +7,24 @@ import {
 } from "@/Redux/Features/Social-connection/Social-connectionApiSlice";
 import { Area, AreaChart, CartesianGrid } from "recharts";
 import NumberFlowComponent from "../NumberFlow/NumberFlowComponent";
+import DashboardCardSkeleton from "../Skeleton/DashboardCardSk";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 
 const DashboardCard = () => {
   const { data, isLoading, isError } =
     useGetReachLikeCommentLastTwoMonthsDataQuery();
-  const { data: chartDataResponse } = useGetLast12MonthsChartDataQuery();
+  const { data: chartDataResponse, isFetching: isChartDataFetching } =
+    useGetLast12MonthsChartDataQuery();
   // console.log(chartDataResponse);
   const chartDataLast12Months = chartDataResponse?.data || [];
-  console.log(chartDataLast12Months);
+  // console.log(chartDataLast12Months);
   const trends = data?.data?.combined?.trends;
 
-  console.log(trends);
+  // console.log(trends);
   const reachColor = getChartColor(trends?.views?.direction);
   const likesColor = getChartColor(trends?.likes?.direction);
   const commentsColor = getChartColor(trends?.comments?.direction);
-  console.log(reachColor, likesColor, commentsColor);
+  // console.log(reachColor, likesColor, commentsColor);
 
   // Dynamic chart configs
   const reachChartConfig = {
@@ -55,46 +57,53 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer config={reachChartConfig} className={"w-full h-full"}>
-            <AreaChart accessibilityLayer data={chartDataLast12Months}>
-              <CartesianGrid vertical={false} horizontal={false} />
+          {isChartDataFetching ? (
+            <DashboardCardSkeleton />
+          ) : (
+            <ChartContainer
+              config={reachChartConfig}
+              className={"w-full h-full"}
+            >
+              <AreaChart accessibilityLayer data={chartDataLast12Months}>
+                <CartesianGrid vertical={false} horizontal={false} />
 
-              <ChartTooltip
-                cursor={true}
-                offset={20}
-                content={
-                  <ChartTooltipContent
-                    indicator="line"
-                    labelFormatter={(_, payload) =>
-                      payload?.[0]?.payload?.month ?? ""
-                    }
-                  />
-                }
-              />
-              <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-reach)"
-                    stopOpacity={0.7}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-reach)"
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="reach"
-                type="natural"
-                fill="url(#colorUv)"
-                fillOpacity={0.4}
-                stroke="var(--color-reach)"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ChartContainer>
+                <ChartTooltip
+                  cursor={true}
+                  offset={20}
+                  content={
+                    <ChartTooltipContent
+                      indicator="line"
+                      labelFormatter={(_, payload) =>
+                        payload?.[0]?.payload?.month ?? ""
+                      }
+                    />
+                  }
+                />
+                <defs>
+                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="var(--color-reach)"
+                      stopOpacity={0.7}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="var(--color-reach)"
+                      stopOpacity={0}
+                    />
+                  </linearGradient>
+                </defs>
+                <Area
+                  dataKey="reach"
+                  type="natural"
+                  fill="url(#colorUv)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-reach)"
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ChartContainer>
+          )}
         </div>
       </div>
       {/* card 2  */}
@@ -115,45 +124,52 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer config={likesChartConfig} className={"w-full h-full"}>
-            <AreaChart accessibilityLayer data={chartDataLast12Months}>
-              <CartesianGrid vertical={false} horizontal={false} />
-              <ChartTooltip
-                cursor={true}
-                offset={20}
-                content={
-                  <ChartTooltipContent
-                    indicator="line"
-                    labelFormatter={(_, payload) =>
-                      payload?.[0]?.payload?.month ?? ""
-                    }
-                  />
-                }
-              />
-              <defs>
-                <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-like)"
-                    stopOpacity={0.7}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-like)"
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="like"
-                type="natural"
-                fill="url(#chart-like)"
-                fillOpacity={0.4}
-                stroke="var(--color-like)"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ChartContainer>
+          {isChartDataFetching ? (
+            <DashboardCardSkeleton />
+          ) : (
+            <ChartContainer
+              config={likesChartConfig}
+              className={"w-full h-full"}
+            >
+              <AreaChart accessibilityLayer data={chartDataLast12Months}>
+                <CartesianGrid vertical={false} horizontal={false} />
+                <ChartTooltip
+                  cursor={true}
+                  offset={20}
+                  content={
+                    <ChartTooltipContent
+                      indicator="line"
+                      labelFormatter={(_, payload) =>
+                        payload?.[0]?.payload?.month ?? ""
+                      }
+                    />
+                  }
+                />
+                <defs>
+                  <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="var(--color-like)"
+                      stopOpacity={0.7}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="var(--color-like)"
+                      stopOpacity={0}
+                    />
+                  </linearGradient>
+                </defs>
+                <Area
+                  dataKey="like"
+                  type="natural"
+                  fill="url(#chart-like)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-like)"
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ChartContainer>
+          )}
         </div>
       </div>
       {/* card 3  */}
@@ -174,48 +190,52 @@ const DashboardCard = () => {
           </p>
         </div>
         <div className="w-1/3">
-          <ChartContainer
-            config={commentsChartConfig}
-            className={"w-full h-full"}
-          >
-            <AreaChart accessibilityLayer data={chartDataLast12Months}>
-              <CartesianGrid vertical={false} horizontal={false} />
-              <ChartTooltip
-                cursor={true}
-                offset={20}
-                content={
-                  <ChartTooltipContent
-                    indicator="line"
-                    labelFormatter={(_, payload) =>
-                      payload?.[0]?.payload?.month ?? ""
-                    }
-                  />
-                }
-              />
-              <defs>
-                <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-comment)"
-                    stopOpacity={0.7}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-comment)"
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="comment"
-                type="natural"
-                fill="url(#chart-like)"
-                fillOpacity={0.4}
-                stroke="var(--color-comment)"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ChartContainer>
+          {isChartDataFetching ? (
+            <DashboardCardSkeleton />
+          ) : (
+            <ChartContainer
+              config={commentsChartConfig}
+              className={"w-full h-full"}
+            >
+              <AreaChart accessibilityLayer data={chartDataLast12Months}>
+                <CartesianGrid vertical={false} horizontal={false} />
+                <ChartTooltip
+                  cursor={true}
+                  offset={20}
+                  content={
+                    <ChartTooltipContent
+                      indicator="line"
+                      labelFormatter={(_, payload) =>
+                        payload?.[0]?.payload?.month ?? ""
+                      }
+                    />
+                  }
+                />
+                <defs>
+                  <linearGradient id="chart-like" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="var(--color-comment)"
+                      stopOpacity={0.7}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="var(--color-comment)"
+                      stopOpacity={0}
+                    />
+                  </linearGradient>
+                </defs>
+                <Area
+                  dataKey="comment"
+                  type="natural"
+                  fill="url(#chart-like)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-comment)"
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ChartContainer>
+          )}
         </div>
       </div>
     </div>
