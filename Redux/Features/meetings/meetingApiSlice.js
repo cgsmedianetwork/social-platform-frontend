@@ -13,8 +13,18 @@ export const meetingApiSlice = apiSlice.injectEndpoints({
           },
         };
       },
+      invalidatesTags: ["MeetingBookings"],
+    }),
+
+    getUserMeetingBookings: builder.query({
+      query: ({ startDate, endDate }) => ({
+        url: `/meeting-bookings/user-meeting-bookings?startDate=${startDate}&endDate=${endDate}`,
+        method: "GET",
+      }),
+      providesTags: ["MeetingBookings"],
     }),
   }),
 });
 
-export const { useCreateMeetingMutation } = meetingApiSlice;
+export const { useCreateMeetingMutation, useGetUserMeetingBookingsQuery } =
+  meetingApiSlice;

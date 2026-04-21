@@ -37,7 +37,7 @@ const LoginForms = () => {
     const response = await login({
       phone: data?.phone,
       password: data?.password,
-    })
+    });
 
     // console.log("response", response);
 
@@ -47,7 +47,7 @@ const LoginForms = () => {
         setUser({
           user: response?.data?.data?.userData,
           token: response?.data?.data?.accessToken,
-        })
+        }),
       );
       setLoading(false);
       router.push("/dashboard");
@@ -65,11 +65,11 @@ const LoginForms = () => {
             alt="logo"
             width={100}
             height={100}
-            className="w-24"
+            className="md:w-24 w-20"
           />
         </Link>
       </div>
-      <h1 className="text-3xl font-semibold mt-4">Log in</h1>
+      <h1 className="text-2xl md:text-3xl font-semibold mt-4">Log in</h1>
       <p className="mt-2 text-neutral-500 text-sm">
         Welcome back! Please enter your details.
       </p>

@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 
 const LoginPage = () => {
   return (
-    <div className="w-full min-h-screen grid grid-cols-2">
-      <div className=" relative flex size-full items-center justify-end overflow-hidden p-20">
+    <div className="w-full min-h-screen grid grid-cols-1 md:grid-cols-2">
+      <div className="hidden md:flex relative size-full items-center justify-end overflow-hidden p-20">
         <GridPattern
           x={-30}
           y={-30}
@@ -18,7 +18,7 @@ const LoginPage = () => {
             [5, 1],
           ]}
           className={cn(
-            "[mask-image:linear-gradient(to_bottom_right,white,transparent)]"
+            "[mask-image:linear-gradient(to_bottom_right,white,transparent)]",
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent to-brand-50"></div>
@@ -32,7 +32,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-center justify-center p-4">
         <LoginForms />
       </div>
     </div>

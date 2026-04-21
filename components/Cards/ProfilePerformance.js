@@ -140,6 +140,10 @@ const ProfilePerformance = () => {
               </p>
             </div>
           )}
+          <p className="w-full text-right text-xs">
+            <span className="text-red-500">*</span> Some data might be missing
+            for platform restrictions.
+          </p>
         </>
       )}
     </div>

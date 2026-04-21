@@ -54,7 +54,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
     // console.log(data);
     data.startTime = combineDateAndTime(data.date, data.startTime);
     data.endTime = combineDateAndTime(data.date, data.endTime);
-    console.log(data);
+    // console.log(data);
     try {
       const response = await createMeeting(data).unwrap();
       // console.log(response);
