@@ -51,10 +51,11 @@ const RequestMeeting = ({ className, title, buttonText }) => {
 
   // on submit function
   async function onSubmit(data) {
-    // console.log(data);
+    console.log(data);
     data.startTime = combineDateAndTime(data.date, data.startTime);
     data.endTime = combineDateAndTime(data.date, data.endTime);
-    // console.log(data);
+    console.log(data);
+    // return;
     try {
       const response = await createMeeting(data).unwrap();
       // console.log(response);
@@ -162,6 +163,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                             selected={field.value}
                             onSelect={(date) => {
                               field.onChange(date);
+                              console.log(date);
                               setOpenDate(false);
                             }}
                           />

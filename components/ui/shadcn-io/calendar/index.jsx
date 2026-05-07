@@ -176,7 +176,7 @@ export const CalendarBody = ({ features, children, onDayClick }) => {
     const result = {};
     for (let day = 1; day <= daysInMonth; day++) {
       result[day] = features?.filter((feature) => {
-        return isSameDay(new Date(feature.endAt), new Date(year, month, day));
+        return isSameDay(new Date(feature.startAt), new Date(year, month, day));
       });
     }
     return result;
@@ -200,7 +200,7 @@ export const CalendarBody = ({ features, children, onDayClick }) => {
 
     days.push(
       <div
-        className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs"
+        className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs cursor-pointer"
         key={day}
         onClick={() => onDayClick?.(day)}
       >

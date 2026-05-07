@@ -98,6 +98,20 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["socialConnection"],
     }),
+    disconnectSocialAccount: builder.mutation({
+      query: ({ provider, providerId }) => {
+        return {
+          url: `/social-connection/disconnect-account/${provider}/${
+            providerId
+          }`,
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      invalidatesTags: ["socialConnection"],
+    }),
   }),
 });
 
@@ -110,4 +124,5 @@ export const {
   useGetReachLikeCommentLastTwoMonthsDataQuery,
   useGetLast12MonthsChartDataQuery,
   useGetFollowersLast12MonthsQuery,
+  useDisconnectSocialAccountMutation,
 } = socialConnectionApiSlice;

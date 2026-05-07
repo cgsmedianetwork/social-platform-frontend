@@ -1,6 +1,6 @@
 "use client";
 import { useGetUserMeetingBookingsQuery } from "@/Redux/Features/meetings/meetingApiSlice";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CalendarBody,
   CalendarDate,
@@ -12,6 +12,7 @@ import {
   useCalendarMonth,
   useCalendarYear,
 } from "../ui/shadcn-io/calendar";
+import CalenderDialog from "./CalenderDialog";
 
 const statusColorMap = {
   pending: "#F59E0B",
@@ -25,6 +26,7 @@ const CalenderContent = () => {
   const [year] = useCalendarYear();
   const [selectedDay, setSelectedDay] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedMeetings, setSelectedMeetings] = useState([]);
 
   const { startDate, endDate } = useMemo(() => {
     const start = new Date(year, month, 1);
@@ -36,12 +38,13 @@ const CalenderContent = () => {
   }, [month, year]);
 
   // console.log("startDate and endDate", startDate, endDate);
+  // console.log("startDate and endDate", startDate, endDate);
   const { data, isLoading } = useGetUserMeetingBookingsQuery({
     startDate,
     endDate,
   });
 
-  console.log("meetingBookings", data);
+  // console.log("meetingBookings", data);
 
   const features = useMemo(() => {
     if (!data?.data) return [];
@@ -70,10 +73,16 @@ const CalenderContent = () => {
     });
   }, [selectedDay, features, year, month]);
 
-  console.log("exampleFeatures", features);
+  // console.log("exampleFeatures", features);
+
+  useEffect(() => {
+    // console.log("selectedDay", selectedDayFeatures);
+    // console.log(new Date(selectedDay));
+    setSelectedMeetings(selectedDayFeatures);
+  }, [selectedDayFeatures]);
 
   const handleDayClick = (day) => {
-    console.log("day clicked!!", day);
+    // console.log("day", day);
     setSelectedDay(day);
     setDialogOpen(true);
   };
@@ -83,7 +92,7 @@ const CalenderContent = () => {
       <CalendarDate>
         <div className="flex items-center gap-3">
           <CalendarMonthPicker />
-          <CalendarYearPicker start={2025} end={2040} />
+          <CalendarYearPicker start={2025} end={2050} />
         </div>
         <CalendarDatePagination />
       </CalendarDate>
@@ -102,6 +111,11 @@ const CalenderContent = () => {
           Loading bookings...
         </div>
       )}
+      <CalenderDialog
+        open={dialogOpen}
+        setOpen={setDialogOpen}
+        data={selectedMeetings}
+      />
     </>
   );
 };

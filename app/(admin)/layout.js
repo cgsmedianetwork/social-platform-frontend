@@ -38,9 +38,9 @@ const AdminLayout = ({ children }) => {
           </ScrollArea>
 
           {/* Bottom: Logout */}
-          <div className="p-4 ">
+          {/* <div className="p-4 ">
             <button className="w-full py-2 px-4 rounded text-sm">Logout</button>
-          </div>
+          </div> */}
         </aside>
         <main className="flex-1 overflow-y-auto flex flex-col w-full bg-[#F9FBFB]">
           <AdminDashboardNavbar />

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import logo from "../../Assets/logo.webp";
 import DashboardProfileDropdown from "../Dropdown/DashboardProfileDropdown";
-import ActiveLink from "./ActiveLink";
+import ProfileLink from "./ProfileLink";
 
 const DashboardNavbar = () => {
   return (
@@ -13,11 +13,8 @@ const DashboardNavbar = () => {
         <Link href={"/"}>
           <Image src={logo} alt="logo" className="w-14" />
         </Link>
-        {/* <Link href="/dashboard" className="text-sm ">
-          Dashboard
-        </Link> */}
-        <ActiveLink href={"/dashboard"}>Dashboard</ActiveLink>
-        <ActiveLink href={"/booking-schedule"}>Booking Schedule</ActiveLink>
+
+        <ProfileLink />
       </div>
       <div className="flex items-center gap-5">
         <MessageCircle size={20} />
