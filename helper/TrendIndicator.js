@@ -18,11 +18,11 @@ const TrendIndicator = ({ direction, percentage }) => {
     );
   }
   return (
-    <span className="flex items-center gap-0.5 text-primary text-xs">
+    <span className="flex items-center gap-0.5 text-neutral-500 text-xs">
       <EqualApproximatelyIcon
         size={16}
         strokeWidth={2.5}
-        className="text-primary"
+        className="text-neutral-500"
       />
       0%
     </span>

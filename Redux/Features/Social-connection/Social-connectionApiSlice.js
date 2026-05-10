@@ -98,6 +98,18 @@ export const socialConnectionApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["socialConnection"],
     }),
+    getTotalFollowersByAccount: builder.query({
+      query: () => {
+        return {
+          url: "/social-connection/total-followers-by-account",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      providesTags: ["socialConnection"],
+    }),
     disconnectSocialAccount: builder.mutation({
       query: ({ provider, providerId }) => {
         return {
@@ -125,4 +137,5 @@ export const {
   useGetLast12MonthsChartDataQuery,
   useGetFollowersLast12MonthsQuery,
   useDisconnectSocialAccountMutation,
+  useGetTotalFollowersByAccountQuery,
 } = socialConnectionApiSlice;

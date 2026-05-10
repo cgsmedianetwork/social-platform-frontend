@@ -79,6 +79,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ["adminAndSubAdmin"],
     }),
+    getTotalUserSummary: builder.query({
+      query: () => ({
+        url: "/user/total-user-summary",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -90,4 +96,5 @@ export const {
   useLoginMutation,
   useUpdateProfileMutation,
   useGetAdminAndSubAdminQuery,
+  useGetTotalUserSummaryQuery,
 } = authApiSlice;
