@@ -38,7 +38,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-
     login: builder.mutation({
       query: (data) => {
         return {
@@ -51,7 +50,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-
     logout: builder.mutation({
       query: () => {
         return {
@@ -85,6 +83,28 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAdminUserList: builder.query({
+      query: ({
+        searchTerm = "",
+        badge = "all",
+        page = 1,
+        limit = 10,
+      } = {}) => ({
+        url: "/user/admin-user-list",
+        method: "GET",
+        params: { searchTerm, badge, page, limit },
+      }),
+      providesTags: ["auth"],
+    }),
+
+    updateUserBadge: builder.mutation({
+      query: ({ userId, badge }) => ({
+        url: `/user/${userId}/badge`,
+        method: "PATCH",
+        body: { badge },
+      }),
+      invalidatesTags: ["auth"],
+    }),
   }),
 });
 
@@ -97,4 +117,6 @@ export const {
   useUpdateProfileMutation,
   useGetAdminAndSubAdminQuery,
   useGetTotalUserSummaryQuery,
+  useGetAdminUserListQuery,
+  useUpdateUserBadgeMutation,
 } = authApiSlice;

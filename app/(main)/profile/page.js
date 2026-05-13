@@ -2,7 +2,7 @@ import ConnectSocialMedia from "@/components/ConnectSocialMedia/ConnectSocialMed
 import ProfileHeader from "@/components/Header/ProfileHeader";
 import DashboardNavbar from "@/components/Navbar/DashboardNavbar";
 
-const page = () => {
+const ProfilePage = () => {
   return (
     <div className="w-full min-h-screen relative">
       <div className="absolute top-0 left-0 w-72 h-72 bg-teal-400/50   pointer-events-none  rounded-full opacity-30 blur-[80px] -z-10"></div>
@@ -20,4 +20,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;

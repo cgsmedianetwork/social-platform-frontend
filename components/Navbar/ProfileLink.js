@@ -9,6 +9,9 @@ const ProfileLink = () => {
   // console.log(user);
   return (
     <>
+      {(user?.role === "admin" || user?.role === "moderator") && (
+        <ActiveLink href="/home">Home</ActiveLink>
+      )}
       <ActiveLink
         href={cn(
           user?.role === "admin" || user?.role === "moderator"
