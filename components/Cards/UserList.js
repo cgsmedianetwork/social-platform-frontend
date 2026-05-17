@@ -150,7 +150,7 @@ const UserList = ({ className }) => {
             <TableRow>
               <TableHead className="!rounded-tl-md pl-4">User Name</TableHead>
               <TableHead>Phone</TableHead>
-              <TableHead>Social Link</TableHead>
+              <TableHead>Connected Socials</TableHead>
               <TableHead className="!rounded-tr-md text-center">
                 Badge
               </TableHead>
