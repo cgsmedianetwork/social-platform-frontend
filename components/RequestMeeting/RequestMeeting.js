@@ -223,7 +223,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
               </div>
               {/* description  */}
               <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="description" className="gap-0">
+                <Label htmlFor="description" className="">
                   Description
                 </Label>
                 <FormField

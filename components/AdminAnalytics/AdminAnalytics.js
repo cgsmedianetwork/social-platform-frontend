@@ -14,7 +14,7 @@ const AdminAnalytics = ({ userId }) => {
     useGetAdminAccountAnalyticsQuery(userId);
   const accounts = data?.data?.accounts || [];
   const lastUpdated = data?.data?.lastUpdated;
-  console.log(accounts);
+  // console.log(accounts);
 
   const [refreshAnalytics, { isLoading: isRefreshing }] =
     useRefreshAdminAccountAnalyticsMutation();
@@ -109,6 +109,11 @@ const AdminAnalytics = ({ userId }) => {
               account={account}
             />
           ))}
+          {/* nb */}
+          <p className="text-xs text-end col-span-2">
+            N.B: Some data may be missing because of platform restriction.{" "}
+            <span className="text-red-600">*</span>{" "}
+          </p>
         </div>
       ) : (
         <p className="py-10 text-center text-neutral-500">

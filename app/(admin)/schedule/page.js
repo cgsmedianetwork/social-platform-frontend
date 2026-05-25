@@ -1,44 +1,44 @@
 "use client";
-import RequestMeeting from "@/components/RequestMeeting/RequestMeeting";
-import {
-  CalendarBody,
-  CalendarHeader,
-  CalendarItem,
-  CalendarProvider,
-} from "@/components/ui/shadcn-io/calendar";
-import { faker } from "@faker-js/faker";
+import AdminScheduleContent from "@/components/AdminScheduleContent/AdminScheduleContent";
+import AdminRequestMeeting from "@/components/RequestMeeting/AdminRequestMeeting";
+import { CalendarProvider } from "@/components/ui/shadcn-io/calendar";
+
+const statusColorMap = {
+  pending: "#F59E0B",
+  confirmed: "#10B981",
+  rejected: "#EF4444",
+  completed: "#6B7280",
+};
 
 const SchedulePage = () => {
-  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-  const statuses = [
-    { id: faker.string.uuid(), name: "Planned", color: "#6B7280" },
-    { id: faker.string.uuid(), name: "In Progress", color: "#F59E0B" },
-    { id: faker.string.uuid(), name: "Done", color: "#10B981" },
-  ];
-
-  const exampleFeatures = Array.from({ length: 20 })
-    .fill(null)
-    .map(() => ({
-      id: faker.string.uuid(),
-      name: capitalize(faker.company.buzzPhrase()),
-      startAt: faker.date.past({ years: 0.5, refDate: new Date() }),
-      endAt: faker.date.future({ years: 0.5, refDate: new Date() }),
-      status: faker.helpers.arrayElement(statuses),
-    }));
   return (
     <div className="p-5 px-12 pb-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold ">Schedule Meeting</h1>
-        <RequestMeeting className={"bg-brand-500"} buttonText={"Confirm"} />
+        <h1 className="text-2xl font-semibold "> Meeting Schedule</h1>
+        <AdminRequestMeeting />
       </div>
-      <div className=" w-full border mt-5 rounded-lg overflow-hidden">
+      {/* status color */}
+      <div className="flex items-center justify-end gap-4 mt-5 mb-2">
+        <div className="flex items-center gap-1 text-xs">
+          <span className="h-2 w-2 rounded-full inline-block bg-[#F59E0B]"></span>{" "}
+          Pending
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          <span className="h-2 w-2 rounded-full inline-block bg-[#10B981]"></span>{" "}
+          Confirmed
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          <span className="h-2 w-2 rounded-full inline-block bg-[#EF4444]"></span>{" "}
+          Rejected
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          <span className="h-2 w-2 rounded-full inline-block bg-[#6B7280]"></span>{" "}
+          Completed
+        </div>
+      </div>
+      <div className=" w-full border  rounded-lg overflow-hidden">
         <CalendarProvider>
-          <CalendarHeader className={"bg-brand-100"} />
-          <CalendarBody features={exampleFeatures}>
-            {({ feature }) => (
-              <CalendarItem feature={feature} key={feature.id} />
-            )}
-          </CalendarBody>
+          <AdminScheduleContent />
         </CalendarProvider>
       </div>
     </div>

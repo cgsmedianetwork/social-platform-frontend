@@ -16,6 +16,15 @@ export const meetingApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["MeetingBookings"],
     }),
 
+    createAdminMeeting: builder.mutation({
+      query: (data) => ({
+        url: "/meeting-bookings/admin/create",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["MeetingBookings"],
+    }),
+
     getUserMeetingBookings: builder.query({
       query: ({ startDate, endDate }) => ({
         url: `/meeting-bookings/user-meeting-bookings?startDate=${startDate}&endDate=${endDate}`,
@@ -23,8 +32,31 @@ export const meetingApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["MeetingBookings"],
     }),
+
+    getAdminMeetingBookings: builder.query({
+      query: ({ startDate, endDate }) => ({
+        url: "/meeting-bookings/admin/bookings",
+        method: "GET",
+        params: { startDate, endDate },
+      }),
+      providesTags: ["MeetingBookings"],
+    }),
+
+    updateMeetingStatus: builder.mutation({
+      query: ({ bookingId, status }) => ({
+        url: `/meeting-bookings/admin/${bookingId}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["MeetingBookings"],
+    }),
   }),
 });
 
-export const { useCreateMeetingMutation, useGetUserMeetingBookingsQuery } =
-  meetingApiSlice;
+export const {
+  useCreateMeetingMutation,
+  useGetUserMeetingBookingsQuery,
+  useCreateAdminMeetingMutation,
+  useGetAdminMeetingBookingsQuery,
+  useUpdateMeetingStatusMutation,
+} = meetingApiSlice;

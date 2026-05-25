@@ -17,7 +17,18 @@ const DashboardNavbar = () => {
         <ProfileLink />
       </div>
       <div className="flex items-center gap-5">
-        <MessageCircle size={20} />
+        {/* whatsapp chat button */}
+        <a
+          href="https://wa.me/01616678845"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* <button className="">
+            <MessageCircle size={20} />
+          </button> */}
+          <MessageCircle size={20} />
+        </a>
+
         <DashboardProfileDropdown />
       </div>
     </div>

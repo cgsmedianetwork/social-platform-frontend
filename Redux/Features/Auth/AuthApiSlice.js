@@ -96,7 +96,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["auth"],
     }),
-
     updateUserBadge: builder.mutation({
       query: ({ userId, badge }) => ({
         url: `/user/${userId}/badge`,

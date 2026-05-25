@@ -11,7 +11,16 @@ const AdminDashboardNavbar = () => {
             <Plus size={20} /> Meeting Schedule
           </button>
         </Link>
-        <MessageCircle size={20} />
+        <a
+          href="https://wa.me/01616678845"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* <button className="">
+            <MessageCircle size={20} />
+          </button> */}
+          <MessageCircle size={20} />
+        </a>
         {/* <Link href={"/profile"}>
           <Image
             src={user}

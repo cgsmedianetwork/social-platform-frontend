@@ -185,11 +185,6 @@ const AnalyticsReportCard = ({ account }) => {
           </BarChart>
         </ChartContainer>
       </div>
-      {/* nb */}
-      <p className="text-xs">
-        N.B: Some data may be missing because of platform restriction.{" "}
-        <span className="text-red-600">*</span>{" "}
-      </p>
     </div>
   );
 };
