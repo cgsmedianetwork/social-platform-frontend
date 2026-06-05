@@ -29,10 +29,10 @@ const CustomCombobox = ({
 
   return (
     <Popover className={"!block"} open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className="cursor-pointer">
+      <PopoverTrigger className="cursor-pointer w-full">
         <span
           // type="button"
-          className={`border flex items-center justify-between w-full text-sm px-2.5 ${
+          className={`border flex items-center justify-between w-full text-sm text-gray-500 px-2.5 ${
             hasPlus ? "pr-10" : "pr-4"
           } py-2 rounded-lg relative overflow-hidden`}
         >

@@ -96,6 +96,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["auth"],
     }),
+    getSubAdminList: builder.query({
+      query: ({ searchTerm = "", page = 1, limit = 10 } = {}) => ({
+        url: "/user/sub-admin-list",
+        method: "GET",
+        params: { searchTerm, page, limit },
+      }),
+      providesTags: ["adminAndSubAdmin"],
+    }),
     updateUserBadge: builder.mutation({
       query: ({ userId, badge }) => ({
         url: `/user/${userId}/badge`,
@@ -103,6 +111,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { badge },
       }),
       invalidatesTags: ["auth"],
+    }),
+    assignSubAdmin: builder.mutation({
+      query: (data) => ({
+        url: "/user/assign-sub-admin",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["adminAndSubAdmin"],
+    }),
+    removeSubAdmin: builder.mutation({
+      query: (userId) => ({
+        url: `/user/${userId}/remove-sub-admin`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["adminAndSubAdmin"],
     }),
   }),
 });
@@ -118,4 +141,7 @@ export const {
   useGetTotalUserSummaryQuery,
   useGetAdminUserListQuery,
   useUpdateUserBadgeMutation,
+  useGetSubAdminListQuery,
+  useAssignSubAdminMutation,
+  useRemoveSubAdminMutation,
 } = authApiSlice;
