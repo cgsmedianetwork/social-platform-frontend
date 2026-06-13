@@ -155,7 +155,7 @@ const SubAdminPage = () => {
               <TableHead className="pl-5">Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead className={"px-5"}>Phone</TableHead>
-              <TableHead className="">Actions</TableHead>
+              <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -173,7 +173,7 @@ const SubAdminPage = () => {
                   <TableCell className="text-ellipsis whitespace-break-spaces px-5">
                     {user.phone || "N/A"}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="flex justify-center">
                     <button
                       type="button"
                       onClick={() => handleRemove(user._id)}

@@ -50,7 +50,28 @@ const ProfileHeader = () => {
 
   const handleProfileInfoUpdate = async () => {
     try {
-      const response = await updateProfile(profileInfo).unwrap();
+      const nameChanged =
+        profileInfo.name?.trim() !== (user?.name || "").trim();
+
+      const emailChanged =
+        profileInfo.email?.trim() !== (user?.email || "").trim();
+
+      if (!nameChanged && !emailChanged) {
+        toast.error("No changes found");
+        return;
+      }
+
+      const payload = {};
+
+      if (nameChanged) {
+        payload.name = profileInfo.name;
+      }
+
+      if (emailChanged) {
+        payload.email = profileInfo.email;
+      }
+
+      const response = await updateProfile(payload).unwrap();
 
       if (response?.success) {
         dispatch(setUser({ user: response?.data?.result, token }));
@@ -92,7 +113,17 @@ const ProfileHeader = () => {
                 type="file"
                 id="profile-picture"
                 className="hidden"
-                onChange={(e) => handleProfileImage(e.target.files[0])}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  const maxSize = 3 * 1024 * 1024; // 3MB
+                  if (file.size > maxSize) {
+                    toast.error("Image size must be less than 3MB");
+                    e.target.value = "";
+                    return;
+                  }
+                  handleProfileImage(file);
+                }}
                 accept="image/*"
               />
             </label>

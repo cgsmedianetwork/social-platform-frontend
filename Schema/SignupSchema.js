@@ -2,10 +2,13 @@ import z from "zod";
 
 export const SignupSchema = z.object({
   email: z
-    .string({ required_error: "Email is required" })
-    .email({ message: "Invalid email address" })
+    .string()
     .trim()
-    .toLowerCase(),
+    .toLowerCase()
+    .email({ message: "Invalid email address" })
+    .optional()
+    .or(z.literal(""))
+    .transform((value) => value || undefined),
   phone: z
     .string({ required_error: "Phone number is required" })
     .min(11, { message: "Phone number must be at least 11 digits" })

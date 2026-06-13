@@ -1,17 +1,6 @@
 "use client";
 
-import BasicInfo from "@/components/Stepper/BasicInfo";
-import ConnectPlatforms from "@/components/Stepper/ConnectPlatforms";
-import PersonalQuiz from "@/components/Stepper/PersonalQuiz";
-import {
-  Stepper,
-  StepperDescription,
-  StepperIndicator,
-  StepperItem,
-  StepperSeparator,
-  StepperTitle,
-  StepperTrigger,
-} from "@/components/ui/stepper";
+import CompleteProfileForm from "@/components/CompleteProfileForm/CompleteProfileForm";
 import { useState } from "react";
 
 const StepperPage = () => {
@@ -36,7 +25,7 @@ const StepperPage = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10">
-      <Stepper onValueChange={setCurrentStep} value={currentStep}>
+      {/* <Stepper onValueChange={setCurrentStep} value={currentStep}>
         {steps.map(({ step, title, description }) => (
           <StepperItem
             className="relative flex-1 flex-col!"
@@ -64,7 +53,8 @@ const StepperPage = () => {
         <PersonalQuiz setStep={setCurrentStep} currentStep={currentStep} />
       ) : (
         <ConnectPlatforms setStep={setCurrentStep} currentStep={currentStep} />
-      )}
+      )} */}
+      <CompleteProfileForm />
     </div>
   );
 };

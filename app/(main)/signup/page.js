@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 
 const page = () => {
   return (
-    <div className="w-full min-h-screen grid grid-cols-2">
-      <div className=" relative flex size-full items-center justify-end overflow-hidden p-10">
+    <div className="w-full min-h-screen grid grid-cols-1 md:grid-cols-2">
+      <div className="hidden md:flex relative size-full items-center justify-end overflow-hidden p-10">
         <GridPattern
           x={-30}
           y={-30}
@@ -19,7 +19,7 @@ const page = () => {
             [5, 1],
           ]}
           className={cn(
-            "[mask-image:linear-gradient(to_bottom_right,white,transparent)]"
+            "[mask-image:linear-gradient(to_bottom_right,white,transparent)]",
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent to-brand-50"></div>
@@ -35,7 +35,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex items-center justify-center p-10 px-16">
+      <div className="w-full flex items-center justify-center md:p-10 md:px-16 ">
         <SignupForms />
       </div>
     </div>

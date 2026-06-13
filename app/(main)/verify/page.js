@@ -29,7 +29,7 @@ const VerifyEmailPage = () => {
   const dispatch = useDispatch();
   const [isResend, setIsResend] = useState(false);
   const { sessionId, time, prevSend } = useSelector(
-    (state) => state.authHelper
+    (state) => state.authHelper,
   );
   useEffect(() => {
     if (time > 0) {
@@ -82,7 +82,7 @@ const VerifyEmailPage = () => {
             sessionId: result?.data?.sessionId,
             time: result?.data?.time,
             prevSend: result?.data?.prevSend,
-          })
+          }),
         );
         toast.success("OTP resent successfully!", {
           id: sendingToast,
@@ -116,21 +116,21 @@ const VerifyEmailPage = () => {
           [17, 4],
         ]}
         className={cn(
-          "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)] -z-30"
+          "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)] -z-30",
         )}
       />
-      <h1 className="z-20 bg-white shadow-2xl p-8 rounded-2xl min-w-md flex flex-col gap-6">
+      <div className="z-20 bg-white shadow-2xl p-5 sm:p-8 rounded-2xl w-full sm:max-w-md flex flex-col gap-6 border border-red-600 mx-2">
         <div className="flex justify-center">
           <div className="border rounded-md p-3">
             <Mail01Icon size={24} strokeWidth={1.8} />
           </div>
         </div>
         <div>
-          <h2 className="text-3xl text-center font-semibold text-neutral-950">
+          <h2 className="text-2xl sm:text-3xl text-center font-semibold text-neutral-950">
             {" "}
             Input the OTP code
           </h2>
-          <p className="text-neutral-500 text-center text-sm mt-2">
+          <p className="text-neutral-500 text-center text-sm mt-1 sm:mt-2">
             We sent a otp to your phone.
           </p>
         </div>
@@ -153,25 +153,25 @@ const VerifyEmailPage = () => {
                       <InputOTPSlot
                         index={0}
                         className={cn(
-                          "w-20 h-20 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl"
+                          "sm:w-20 w-16 sm:h-20 h-16 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl",
                         )}
                       />
                       <InputOTPSlot
                         index={1}
                         className={cn(
-                          "w-20 h-20 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl"
+                          "sm:w-20 w-16 sm:h-20 h-16 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl",
                         )}
                       />
                       <InputOTPSlot
                         index={2}
                         className={cn(
-                          "w-20 h-20 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl"
+                          "sm:w-20 w-16 sm:h-20 h-16 !bg-transparent !rounded-l-xl rounded-r-xl border text-4xl",
                         )}
                       />
                       <InputOTPSlot
                         index={3}
                         className={cn(
-                          "w-20 h-20 !bg-transparent !rounded-l-xl !rounded-r-xl border text-4xl"
+                          "sm:w-20 w-16 sm:h-20 h-16 !bg-transparent !rounded-l-xl !rounded-r-xl border text-4xl",
                         )}
                       />
                     </InputOTPGroup>
@@ -215,7 +215,7 @@ const VerifyEmailPage = () => {
             />
           )}
         </p>
-      </h1>
+      </div>
     </section>
   );
 };

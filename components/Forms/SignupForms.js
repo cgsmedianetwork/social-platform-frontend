@@ -32,7 +32,7 @@ const SignupForms = () => {
     // console.log(data);
     try {
       const result = await signUpInit(data).unwrap();
-      console.log("result", result);
+      // console.log("result", result);
       // console.log("result?.data?.sendOTP", result?.data?.sendOTP);
       // set Session
       if (result?.data?.sendOTP) {
@@ -44,7 +44,7 @@ const SignupForms = () => {
             sessionId: result?.data?.sessionId,
             time: result?.data?.time,
             prevSend: result?.data?.prevSend,
-          })
+          }),
         );
         router.push("/verify");
       } else {
@@ -52,12 +52,12 @@ const SignupForms = () => {
       }
     } catch (error) {
       toast.error(
-        error?.data?.message || "Failed to create account. Try again!"
+        error?.data?.message || "Failed to create account. Try again!",
       );
     }
   };
   return (
-    <div className="max-w-[420px]  w-full p-5 bg-neutral-50 rounded-2xl">
+    <div className="sm:max-w-[420px]  w-full  p-5 bg-neutral-50 rounded-2xl mx-3 md:mx-0">
       <h1 className="text-3xl font-semibold">Signup</h1>
       <p className="mt-2 text-neutral-500 text-sm">
         Empower your experience, sign up for a free
@@ -126,7 +126,7 @@ const SignupForms = () => {
                   <CustomCheckbox id={"terms"} field={field} />
                   <label
                     htmlFor="terms"
-                    className="text-sm mt-1 text-neutral-500 flex-1"
+                    className="text-xs sm:text-sm mt-1 text-neutral-500 flex-1"
                   >
                     Please exclude me from any future emails regarding Triosale
                     and related Intuit product and feature updates, marketing
