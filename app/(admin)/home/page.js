@@ -5,13 +5,13 @@ import UserList from "@/components/Cards/UserList";
 
 const page = () => {
   return (
-    <section className="p-4 px-6 flex flex-col flex-1">
+    <section className="p-2.5 sm:p-4 sm:px-6 max-w-[1300px] xl:mx-auto w-full flex flex-col flex-1">
       <DashboardCardforAdmin />
-      <div className="flex gap-4 my-4 ">
-        <div className="w-[70%]">
+      <div className="flex gap-4 my-4 flex-col lg:flex-row">
+        <div className="w-full lg:w-[70%]">
           <PerformanceTrend />
         </div>
-        <div className="flex-1">
+        <div className="w-full lg:flex-1">
           <TotalUser />
         </div>
       </div>

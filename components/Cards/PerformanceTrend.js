@@ -147,13 +147,13 @@ const PerformanceTrend = () => {
   };
 
   return (
-    <div className="w-full p-5 px-6 rounded-lg bg-white">
+    <div className="w-full p-2 sm:p-5 px-3 sm:px-6 rounded-lg bg-white">
       <div className="flex justify-between">
         <div className="flex-1">
-          <h1 className="font-semibold text-lg">
+          <h1 className="font-semibold text-base sm:text-lg">
             Total Followers / Subscribers
           </h1>
-          <p className="text-sm text-neutral-500">
+          <p className="text-xs sm:text-sm text-neutral-500">
             Total followers/subscribers from connected platforms.
           </p>
         </div>

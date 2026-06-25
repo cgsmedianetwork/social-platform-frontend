@@ -8,13 +8,13 @@ const ProfileLink = () => {
   const { user } = useSelector((state) => state.auth);
   // console.log(user);
   return (
-    <>
-      {(user?.role === "admin" || user?.role === "moderator") && (
+    <div className="flex items-center gap-5">
+      {(user?.role === "admin" || user?.role === "subAdmin") && (
         <ActiveLink href="/home">Home</ActiveLink>
       )}
       <ActiveLink
         href={cn(
-          user?.role === "admin" || user?.role === "moderator"
+          user?.role === "admin" || user?.role === "subAdmin"
             ? "/admin-dashboard"
             : "/dashboard",
         )}
@@ -23,14 +23,14 @@ const ProfileLink = () => {
       </ActiveLink>
       <ActiveLink
         href={cn(
-          user?.role === "admin" || user?.role === "moderator"
+          user?.role === "admin" || user?.role === "subAdmin"
             ? "/schedule"
             : "/booking-schedule",
         )}
       >
         Booking Schedule
       </ActiveLink>
-    </>
+    </div>
   );
 };
 

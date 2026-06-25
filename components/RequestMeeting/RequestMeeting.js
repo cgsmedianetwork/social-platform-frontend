@@ -77,11 +77,12 @@ const RequestMeeting = ({ className, title, buttonText }) => {
       <button
         onClick={() => setOpen(true)}
         className={cn(
-          "flex items-center gap-1 px-3 py-1.5 border-2 border-brand-500 rounded-md text-sm font-semibold cursor-pointer",
+          "flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-3 py-1.5 border sm:border-2 border-brand-500 rounded-md text-xs sm:text-sm font-semibold cursor-pointer",
           className,
         )}
       >
-        <Plus size={18} strokeWidth={2.5} /> {title || "Book a Meeting"}
+        <Plus strokeWidth={2.5} className="size-3 sm:size-4" />{" "}
+        {title || "Book a Meeting"}
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className={cn("border py-3.5 ")}>

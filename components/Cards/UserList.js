@@ -110,15 +110,15 @@ const UserList = ({ className }) => {
   return (
     <div className={cn("mb-48 px-5 py-4 bg-white rounded-md", className)}>
       {/* heading, searchbox and filter  */}
-      <div className="flex justify-between gap-2 ">
-        <h1 className="text-lg font-medium flex items-center gap-2">
+      <div className="flex justify-between gap-2 flex-wrap">
+        <h1 className="text-base sm:text-lg font-medium flex items-center gap-2">
           <UserGroupIcon size={20} /> User List
         </h1>
         <div className="flex items-center gap-3">
           <div className="relative">
             <CustomInput
               placeholder={"Name, email or phone "}
-              inputClass={"pl-8"}
+              inputClass={"pl-8 !py-2 sm:!py-2.5 "}
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
@@ -128,7 +128,7 @@ const UserList = ({ className }) => {
             />
           </div>
           <Select value={badge} onValueChange={setBadge}>
-            <SelectTrigger className="w-[150px]">
+            <SelectTrigger className="w-[150px] !py-[18px] sm:!py-5">
               <ListFilter size={16} />
               <SelectValue placeholder="Filter badge" />
             </SelectTrigger>

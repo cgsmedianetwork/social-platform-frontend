@@ -26,7 +26,7 @@ const ProfilePerformance = () => {
   // console.log(chartConfig);
 
   return (
-    <div className="border rounded-lg p-5 px-7 my-4 mb-12">
+    <div className="border rounded-lg p-5 px-3 sm:px-7 my-4 mb-12">
       <h1 className="text-base font-semibold w-full border-b pb-5 text-neutral-900">
         Profile Performance - Followers/Likes
       </h1>
@@ -37,7 +37,8 @@ const ProfilePerformance = () => {
         <>
           {accounts.length > 0 ? (
             <>
-              <div className="flex items-center gap-2 py-2 ml-auto w-fit flex-wrap">
+              {/* label for social accounts */}
+              <div className="flex items-center gap-2 py-2 sm:ml-auto w-fit flex-wrap">
                 <p className="text-xs flex items-center gap-1">
                   <span className="w-2 h-2 bg-[#1877F2] inline-block"></span>{" "}
                   Facebook
@@ -59,7 +60,7 @@ const ProfilePerformance = () => {
                 </p>
               </div>
               <div className="py-8 flex items-center justify-between gap-0 ">
-                <div className="-rotate-90 text-sm text-neutral-500 -ml-5 ">
+                <div className="-rotate-90 text-[10px] sm:text-sm text-neutral-500 -ml-2 sm:-ml-7 w-3 sm:w-auto ">
                   Followers/Likes
                 </div>
 

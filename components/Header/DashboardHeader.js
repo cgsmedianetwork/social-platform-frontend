@@ -11,8 +11,9 @@ const DashboardHeader = () => {
         <div className="flex items-center gap-2">
           <RequestMeeting />
           <Link href={"/profile"} className="cursor-pointer">
-            <button className="border-2 border-brand-500 bg-brand-500 flex items-center gap-1 px-3 py-1.5 text-sm font-semibold rounded-md cursor-pointer">
-              <Link02Icon size={20} strokeWidth={2} /> Add profile
+            <button className="border text-xs sm:text-sm sm:border-2 border-brand-500 bg-brand-500 flex items-center gap-1 px-1.5 sm:px-3 py-1.5 sm:py-1.5 font-semibold rounded-md cursor-pointer">
+              <Link02Icon strokeWidth={2} className="size-3 sm:size-4" /> Add
+              profile
             </button>
           </Link>
         </div>

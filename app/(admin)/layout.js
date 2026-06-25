@@ -12,7 +12,7 @@ const AdminLayout = ({ children }) => {
     <ReduxProvider>
       <div className="w-full h-screen flex overflow-hidden">
         {/* sidebar */}
-        <aside className="w-64  flex-shrink-0 flex flex-col border-r border-gray-200">
+        <aside className="hidden md:flex md:w-48 lg:w-64  flex-shrink-0  md:flex-col border-r border-gray-200">
           {/* Top: Logo */}
           <div className="p-4 px-6 ">
             <Link href="/">

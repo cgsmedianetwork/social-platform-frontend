@@ -20,7 +20,7 @@ const DashboardCardforAdmin = () => {
   const trends = data?.data?.combined?.trends;
   const total = data?.data?.combined?.total;
   // console.log(total);
-  console.log(trends);
+  // console.log(trends);
   // console.log(chartDataLast12Months);
 
   const cards = [
@@ -66,7 +66,7 @@ const DashboardCardforAdmin = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {cards.map((card) => {
         const color = card.config[card.keyName].color;
 
@@ -93,7 +93,7 @@ const DashboardCardforAdmin = () => {
               </p>
             </div>
 
-            <div className="w-1/3">
+            <div className="w-1/2 sm:w-1/2 md:w-1/3">
               {isChartDataFetching ? (
                 <DashboardCardSkeleton />
               ) : (

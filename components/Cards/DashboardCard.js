@@ -38,7 +38,7 @@ const DashboardCard = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-5 py-6">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 py-6">
       {/* card 1 */}
       <div className="p-5 px-6 border border-neutral-200 rounded-lg flex">
         <div className="flex-1">
@@ -56,7 +56,7 @@ const DashboardCard = () => {
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/2 sm:w-1/3">
           {isChartDataFetching ? (
             <DashboardCardSkeleton />
           ) : (
@@ -123,7 +123,7 @@ const DashboardCard = () => {
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/2 sm:w-1/3">
           {isChartDataFetching ? (
             <DashboardCardSkeleton />
           ) : (
@@ -189,7 +189,7 @@ const DashboardCard = () => {
             <span className="text-xs text-neutral-600">vs last month</span>
           </p>
         </div>
-        <div className="w-1/3">
+        <div className="w-1/2 sm:w-1/3">
           {isChartDataFetching ? (
             <DashboardCardSkeleton />
           ) : (
