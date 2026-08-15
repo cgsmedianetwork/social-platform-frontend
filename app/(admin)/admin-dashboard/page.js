@@ -3,7 +3,7 @@ import DashboardCardforAdmin from "@/components/Cards/DashboardCardforAdmin";
 
 const AdminDashboardPage = () => {
   return (
-    <div className="p-4 px-6 pb-10">
+    <div className="p-2.5 sm:p-4 sm:px-6 max-w-[1200px] xl:mx-auto w-full flex-1 pb-10">
       <DashboardCardforAdmin />
       <AdminAnalytics />
     </div>

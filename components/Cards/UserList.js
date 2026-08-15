@@ -70,6 +70,7 @@ const UserList = ({ className }) => {
   const meta = data?.data?.meta;
   const totalPages = Math.ceil((meta?.total || 0) / limit);
   // console.log(data);
+
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch, badge]);
@@ -108,7 +109,12 @@ const UserList = ({ className }) => {
   const paginationItems = getPaginationItems();
 
   return (
-    <div className={cn("mb-48 px-5 py-4 bg-white rounded-md", className)}>
+    <div
+      className={cn(
+        "px-2.5 sm:px-5 py-2.5 sm:py-4 bg-white rounded-md w-full",
+        className,
+      )}
+    >
       {/* heading, searchbox and filter  */}
       <div className="flex justify-between gap-2 flex-wrap">
         <h1 className="text-base sm:text-lg font-medium flex items-center gap-2">

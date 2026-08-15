@@ -27,13 +27,14 @@ const AdminRequestMeeting = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 800);
   console.log(debouncedSearchTerm);
+
   const form = useForm({
     resolver: zodResolver(AdminBookingSchema),
     defaultValues: {
       userId: "",
       date: new Date(),
-      // startTime: "01:30:00",
-      // endTime: "02:00:00",
+      startTime: "01:30:00",
+      endTime: "02:00:00",
       description: "",
       status: "confirmed",
     },

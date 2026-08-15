@@ -12,13 +12,16 @@ const statusColorMap = {
 
 const SchedulePage = () => {
   return (
-    <div className="p-5 px-12 pb-10">
+    <div className="p-2.5 sm:p-6 sm:px-6 max-w-[1200px] xl:mx-auto w-full pb-10">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold "> Meeting Schedule</h1>
+        <h1 className=" text-base sm:text-xl md:text-2xl font-semibold ">
+          {" "}
+          Meeting Schedule
+        </h1>
         <AdminRequestMeeting />
       </div>
       {/* status color */}
-      <div className="flex items-center justify-end gap-4 mt-5 mb-2">
+      <div className="flex flex-wrap items-center justify-end sm:gap-4 gap-2 mt-2.5 sm:mt-5 mb-2">
         <div className="flex items-center gap-1 text-xs">
           <span className="h-2 w-2 rounded-full inline-block bg-[#F59E0B]"></span>{" "}
           Pending

@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { useGetUserMeetingBookingsQuery } from "@/Redux/Features/meetings/meetingApiSlice";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -90,9 +91,13 @@ const CalenderContent = () => {
   return (
     <>
       <CalendarDate>
-        <div className="flex items-center gap-3">
-          <CalendarMonthPicker />
-          <CalendarYearPicker start={2025} end={2050} />
+        <div className="flex items-center sm:gap-3 gap-2">
+          <CalendarMonthPicker className={cn("w-auto text-xs sm:text-xs")} />
+          <CalendarYearPicker
+            start={2025}
+            end={2050}
+            className={cn("w-auto text-xs sm:text-xs")}
+          />
         </div>
         <CalendarDatePagination />
       </CalendarDate>

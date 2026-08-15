@@ -85,7 +85,7 @@ const AnalyticsReportCard = ({ account }) => {
   //   </div>
   // );
   return (
-    <div className="bg-white rounded-md p-4 px-5">
+    <div className="bg-white rounded-md p-3 sm:p-4 px-3 sm:px-5 w-full">
       {/* accounts  */}
       <div className="flex items-center gap-3">
         {account?.accountImage ? (
@@ -104,7 +104,7 @@ const AnalyticsReportCard = ({ account }) => {
           />
         )}
         <div>
-          <span className="block text-base text-neutral-800">
+          <span className="block text-sm sm:text-base text-neutral-800">
             {account?.accountName}
           </span>
           <span className="block text-xs capitalize text-neutral-500">
@@ -114,28 +114,26 @@ const AnalyticsReportCard = ({ account }) => {
       </div>
       {/* followers, reach, engagement headers  */}
       <div className="flex justify-between items-center gap-1 mt-4">
-        <div className="flex justify-between gap-2  text-[13px] text-neutral-500 flex-1">
-          <p>
+        <div className="flex justify-between gap-2 text-[13px] text-neutral-500 flex-1">
+          <div className="flex flex-col items-center ">
             Followers:{" "}
-            <span className="text-neutral-800">
+            <span className="text-neutral-800 text-xs">
               {formatValue(account?.latest?.totalFollowers)}
             </span>
-          </p>
-          <p className="">
-            Reach/Views:{" "}
+          </div>
+          <div className="flex flex-col items-center">
+            Reach/Views: <br className="sm:hidden" /> (this month)
             <span className="text-neutral-800">
               {formatValue(account?.latest?.reach)}
             </span>
-          </p>
-          <p>
-            Engagement:{" "}
+          </div>
+          <div className="flex flex-col items-center">
+            Engagement:
             <span className="text-neutral-800">
               {formatValue(account?.latest?.engagement)}
             </span>
-          </p>
+          </div>
         </div>
-        {/* this month data  */}
-        <p className=" text-xs text-neutral-500 capitalize">(this month)</p>
       </div>
       <p className="mt-3 text-xs text-neutral-400">
         {account?.latest?.fetchedAt
@@ -149,7 +147,7 @@ const AnalyticsReportCard = ({ account }) => {
         </p>
       )}
       {/* charts  */}
-      <div className="mt-8 pb-3">
+      <div className="mt-8 pb-3 w-full">
         <ChartContainer config={chartConfig} className="h-[250px] w-full">
           <BarChart data={chartData} margin={{ left: -10, right: 12 }}>
             <CartesianGrid vertical={false} />

@@ -190,8 +190,8 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                           type="time"
                           id="startTime"
                           step="1"
+                          className={"!text-sm"}
                           // defaultValue="01:30:00"
-                          className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                           {...field}
                         />
                         <FormMessage />
@@ -212,8 +212,8 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                           type="time"
                           id="endTime"
                           step="1"
+                          className={"!text-sm"}
                           // defaultValue="02:30:00"
-                          className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                           {...field}
                         />
                         <FormMessage />
@@ -235,6 +235,7 @@ const RequestMeeting = ({ className, title, buttonText }) => {
                       <Textarea
                         id="description"
                         placeholder="Enter description"
+                        className={"!text-sm"}
                         {...field}
                       />
                       <FormMessage />

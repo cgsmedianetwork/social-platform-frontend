@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useGetAdminMeetingBookingsQuery } from "@/Redux/Features/meetings/meetingApiSlice";
 import { useMemo, useState } from "react";
 import {
@@ -15,7 +16,7 @@ import {
 } from "../ui/shadcn-io/calendar";
 import AdminScheduleDialog from "./AdminScheduleDialog";
 
-const statusColorMap = {
+export const statusColorMap = {
   pending: "#F59E0B",
   confirmed: "#10B981",
   rejected: "#EF4444",
@@ -73,9 +74,13 @@ const AdminScheduleContent = () => {
   return (
     <>
       <CalendarDate>
-        <div className="flex items-center gap-3">
-          <CalendarMonthPicker />
-          <CalendarYearPicker start={2025} end={2050} />
+        <div className="flex items-center sm:gap-3 gap-2">
+          <CalendarMonthPicker className={cn("w-auto text-xs sm:text-xs")} />
+          <CalendarYearPicker
+            start={2025}
+            end={2050}
+            className={cn("w-auto text-xs sm:text-xs")}
+          />
         </div>
         <CalendarDatePagination />
       </CalendarDate>

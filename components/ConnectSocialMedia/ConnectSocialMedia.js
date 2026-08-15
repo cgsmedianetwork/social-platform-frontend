@@ -139,7 +139,11 @@ const ConnectSocialMedia = () => {
       </p>
       <div className="flex flex-col gap-6 mt-8 mb-5 max-w-[500px] mx-auto">
         {/* facebook accounts  */}
-        <div className={cn("flex items-center justify-between gap-3")}>
+        <div
+          className={cn(
+            "flex items-center flex-col sm:flex-row justify-between gap-3 w-full",
+          )}
+        >
           <FacebookButton
             handleFacebook={handleFacebook}
             className={"cursor-pointer"}
@@ -186,7 +190,7 @@ const ConnectSocialMedia = () => {
           </div>
         </div>
         {/* youtube accounts  */}
-        <div className="flex items-center justify-between gap-2 ">
+        <div className="flex items-center flex-col sm:flex-row justify-between gap-2 w-full">
           <YoutubeButton
             handleYoutube={handleYoutube}
             className={"cursor-pointer"}
@@ -232,7 +236,7 @@ const ConnectSocialMedia = () => {
           </div>
         </div>
         {/* instagram accounts  */}
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center flex-col sm:flex-row justify-between gap-3 w-full">
           <InstagramButton
             handleInstagram={handleInstagram}
             className={"cursor-pointer"}
@@ -278,7 +282,7 @@ const ConnectSocialMedia = () => {
           </div>
         </div>
         {/* tiktok accounts  */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-col sm:flex-row justify-between w-full gap-3">
           <TiktokButton
             handleTiktok={handleTiktok}
             className={"cursor-pointer"}

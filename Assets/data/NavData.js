@@ -2,7 +2,6 @@ import {
   Analytics01Icon,
   Calendar04Icon,
   Home04Icon,
-  Settings01Icon,
   UserMultiple02Icon,
 } from "hugeicons-react";
 import { UserIcon } from "lucide-react";
@@ -33,9 +32,9 @@ export const NavData = [
     label: "Sub-admin",
     href: "/sub-admin",
   },
-  {
-    icon: <Settings01Icon size={20} strokeWidth={1.8} opacity={0.8} />,
-    label: "Settings",
-    href: "/settings",
-  },
+  // {
+  //   icon: <Settings01Icon size={20} strokeWidth={1.8} opacity={0.8} />,
+  //   label: "Settings",
+  //   href: "/settings",
+  // },
 ];

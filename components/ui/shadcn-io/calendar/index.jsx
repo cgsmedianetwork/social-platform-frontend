@@ -200,7 +200,7 @@ export const CalendarBody = ({ features, children, onDayClick }) => {
 
     days.push(
       <div
-        className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs cursor-pointer"
+        className="relative flex h-full w-full flex-col gap-1 p-1 text-muted-foreground text-xs cursor-pointer "
         key={day}
         onClick={() => onDayClick?.(day)}
       >
@@ -233,7 +233,7 @@ export const CalendarBody = ({ features, children, onDayClick }) => {
       {days.map((day, index) => (
         <div
           className={cn(
-            "relative aspect-video overflow-hidden border-t border-r text-center",
+            "relative overflow-hidden border-t border-r text-center min-h-[100px] ",
             index % 7 === 6 && "border-r-0",
           )}
           key={index}

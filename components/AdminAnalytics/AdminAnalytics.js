@@ -29,49 +29,11 @@ const AdminAnalytics = ({ userId }) => {
   };
 
   return (
-    // <div className="mt-5">
-    //   <h1 className="text-lg font-medium">Analytics Report</h1>
-    //   <div className="grid grid-cols-2 gap-5 mt-5">
-    //     <AnalyticsReportCard
-    //       icon={<FacebookIcon />}
-    //       title={"Facebook Summary"}
-    //       followers={1000}
-    //       engagement={288}
-    //       impressions={"20.8k"}
-    //       // facebook coror
-    //       color={"#1877F2"}
-    //     />
-    //     <AnalyticsReportCard
-    //       icon={<YoutubeIcon />}
-    //       title={"Youtube Summary"}
-    //       followers={900}
-    //       engagement={200}
-    //       impressions={"15.5k"}
-    //       color={"#FF0000"}
-    //     />
-    //     <AnalyticsReportCard
-    //       icon={<InstagramIcon />}
-    //       title={"Instagram Summary"}
-    //       followers={800}
-    //       engagement={188}
-    //       impressions={"12.5k"}
-    //       color={"#C13584"}
-    //     />
-    //     <AnalyticsReportCard
-    //       icon={<TikTokIcon />}
-    //       title={"Tiktok Summary"}
-    //       followers={700}
-    //       engagement={150}
-    //       impressions={"10.2k"}
-    //       color={"#000000"}
-    //     />
-    //   </div>
-    // </div>
     <div className="mt-5">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-lg font-medium flex items-center gap-2">
-            <AnalyticsUpIcon /> Account Analytics
+          <h1 className="text-base sm:text-lg font-medium flex items-center gap-1 sm:gap-2">
+            <AnalyticsUpIcon className="size-5 sm:size-6" /> Account Analytics
           </h1>
           <p className="text-xs text-neutral-500">
             {lastUpdated
@@ -82,7 +44,7 @@ const AdminAnalytics = ({ userId }) => {
         <button
           onClick={handleRefresh}
           disabled={isRefreshing}
-          className="px-3 py-1.5  rounded-md bg-primary hover:bg-primary/90 text-sm text-white disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
+          className="px-2 sm:px-3 py-1.5  rounded-md bg-primary hover:bg-primary/90 text-sm text-white disabled:opacity-60 cursor-pointer disabled:cursor-not-allowed"
         >
           {isRefreshing ? (
             <span className="flex items-center gap-2 ">
@@ -102,7 +64,7 @@ const AdminAnalytics = ({ userId }) => {
           {error?.data?.message || "Failed to load analytics"}
         </p>
       ) : accounts.length > 0 ? (
-        <div className="grid grid-cols-2 gap-5 mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3 md:gap-5 mt-5">
           {accounts.map((account) => (
             <AnalyticsReportCard
               key={`${account.provider}-${account.providerId}`}
@@ -110,7 +72,7 @@ const AdminAnalytics = ({ userId }) => {
             />
           ))}
           {/* nb */}
-          <p className="text-xs text-end col-span-2">
+          <p className="text-xs text-end col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-2">
             N.B: Some data may be missing because of platform restriction.{" "}
             <span className="text-red-600">*</span>{" "}
           </p>
