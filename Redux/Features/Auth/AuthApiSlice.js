@@ -127,6 +127,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["adminAndSubAdmin"],
     }),
+    getAdminUserDetails: builder.query({
+      query: (userId) => ({
+        url: `/user/admin-user/${userId}`,
+        method: "GET",
+      }),
+      providesTags: ["userDetails"],
+    }),
   }),
 });
 
@@ -144,4 +151,5 @@ export const {
   useGetSubAdminListQuery,
   useAssignSubAdminMutation,
   useRemoveSubAdminMutation,
+  useGetAdminUserDetailsQuery,
 } = authApiSlice;

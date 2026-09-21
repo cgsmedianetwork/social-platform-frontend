@@ -1,5 +1,5 @@
 "use client";
-import DashboardCardforAdmin from "@/components/Cards/DashboardCardforAdmin";
+import UserProfile from "@/components/Cards/UserProfile";
 import PieForOverPerformance from "@/components/Charts/PieForOverPerformance";
 import {
   ChartContainer,
@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/chart";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { Location01Icon } from "hugeicons-react";
 import { CloudDownload } from "lucide-react";
-import Image from "next/image";
+import { useParams } from "next/navigation";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
-import profile from "../../../../Assets/images/testimonial image.webp";
 
 const UserPage = () => {
+  const { slug } = useParams();
+  // console.log(slug);
   const description = "A multiple line chart";
   const chartData = [
     { month: "January", desktop: 186, mobile: 80 },
@@ -37,38 +37,8 @@ const UserPage = () => {
   };
   return (
     <div className="p-5 px-10 pb-20">
-      <div className="flex gap-4">
-        <div className="w-14 h-14 rounded-full overflow-hidden">
-          <Image src={profile} alt="profile" className="" />
-        </div>
-        <div>
-          <div>
-            <h1 className="text-lg font-medium -mt-1">Huzaifa Khan</h1>
-          </div>
-          <div className="flex items-center gap-1">
-            <Location01Icon
-              size={14}
-              strokeWidth={2}
-              className="text-neutral-500"
-            />{" "}
-            <span className="text-xs text-neutral-500 font-medium">
-              Dhaka, Bangladesh
-            </span>
-          </div>
-          <div className="flex items-center gap-2 mt-1">
-            <p className="text-xs  text-neutral-500 font-medium">
-              User ID: 1234567890
-            </p>{" "}
-            <div className="border h-3 border-slate-400"></div>{" "}
-            <div className="text-xs text-neutral-500 font-medium">
-              Influencer
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="mt-6">
-        <DashboardCardforAdmin />
-      </div>
+      <UserProfile id={slug} />
+      <div className="mt-6">{/* <DashboardCardforAdmin /> */}</div>
       <div className="w-full grid grid-cols-3 gap-5 mt-6">
         <div className="col-span-2">
           <h4 className="text-lg font-medium">Profile Performance</h4>
@@ -82,7 +52,7 @@ const UserPage = () => {
                 <TabsTrigger
                   value="all"
                   className={cn(
-                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer"
+                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer",
                   )}
                 >
                   All
@@ -90,7 +60,7 @@ const UserPage = () => {
                 <TabsTrigger
                   value="facebook"
                   className={cn(
-                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer"
+                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer",
                   )}
                 >
                   Facebook
@@ -98,7 +68,7 @@ const UserPage = () => {
                 <TabsTrigger
                   value="instagram"
                   className={cn(
-                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer"
+                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer",
                   )}
                 >
                   Instagram
@@ -106,7 +76,7 @@ const UserPage = () => {
                 <TabsTrigger
                   value="youtube"
                   className={cn(
-                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer"
+                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer",
                   )}
                 >
                   Youtube
@@ -114,7 +84,7 @@ const UserPage = () => {
                 <TabsTrigger
                   value="tiktok"
                   className={cn(
-                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer"
+                    "!px-5 !py-2 data-[state=active]:!bg-white !shadow-none border-none cursor-pointer",
                   )}
                 >
                   Tiktok

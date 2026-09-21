@@ -49,6 +49,7 @@ export const apiSlice = createApi({
     "socialConnection",
     "MeetingBookings",
     "adminAnalytics",
+    "userDetails",
   ],
   endpoints: (builder) => ({}),
 });
