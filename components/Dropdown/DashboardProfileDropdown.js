@@ -1,4 +1,5 @@
 "use client";
+import { clearAuthCookies } from "@/actions/authCookies";
 import { useLogoutMutation } from "@/Redux/Features/Auth/AuthApiSlice";
 import { logout as logoutAction } from "@/Redux/Features/Auth/AuthSlice";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
@@ -27,10 +28,17 @@ const DashboardProfileDropdown = () => {
     const toastId = toast.loading("Logging out...");
     try {
       await logout().unwrap();
-      router.push("/");
+      // Remove the tokens this domain holds, or the middleware keeps the
+      // session open after the backend ends it.
+      await clearAuthCookies();
       dispatch(logoutAction());
+      router.push("/");
       toast.success("Logged out successfully!", { id: toastId });
     } catch (error) {
+      // The backend call failed, so end the session on this side anyway.
+      await clearAuthCookies();
+      dispatch(logoutAction());
+      router.push("/");
       toast.error("Failed to logout!", { id: toastId });
       console.log(error);
     }

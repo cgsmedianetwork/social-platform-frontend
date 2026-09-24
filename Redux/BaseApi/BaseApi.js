@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { clearAuthCookies } from "@/actions/authCookies";
 import { logout, setUser } from "../Features/Auth/AuthSlice";
 const BASE_API_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1`;
 
@@ -33,6 +34,8 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
 
       result = await baseQuery(args, api, extraOptions);
     } else {
+      // The refresh failed, so remove the tokens this domain holds.
+      await clearAuthCookies();
       api.dispatch(logout());
     }
   }
