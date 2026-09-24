@@ -1,4 +1,5 @@
 "use client";
+import { setAuthCookies } from "@/actions/authCookies";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/Redux/Features/Auth/AuthApiSlice";
 import { setUser } from "@/Redux/Features/Auth/AuthSlice";
@@ -49,8 +50,17 @@ const LoginForms = () => {
           token: response?.data?.data?.accessToken,
         }),
       );
+
+      // Store the tokens on this domain, so the middleware can read them.
+      await setAuthCookies({
+        accessToken: response?.data?.data?.accessToken,
+        refreshToken: response?.data?.data?.refreshToken,
+      });
+
       setLoading(false);
-      router.push("/dashboard");
+      router.push(
+        response?.data?.data?.userData?.role === "admin" ? "/home" : "/dashboard",
+      );
     } else {
       toast.error(response?.error?.data?.message || "Login failed!");
       setLoading(false);
