@@ -14,7 +14,7 @@ export default function Home() {
       {/* <RedirectingHelper /> */}
       <div className="w-full overflow-x-hidden">
         <div className="relative w-full">
-          <div className="pt-0 -mx-3 sm:-mx-0 sm:pt-4 w-full custom-container">
+          <div className="pt-0 sm:pt-4 custom-container">
             <Navbar />
             <TopHero />
           </div>

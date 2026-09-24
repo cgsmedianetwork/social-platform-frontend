@@ -5,9 +5,9 @@ import heroImage from "../../Assets/images/hero image.png";
 
 const TopHero = () => {
   return (
-    <section className="py-10 sm:py-20  grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-4">
-      <div className="">
-        <h2 className="text-neutral-950  text-4xl sm:text-6xl font-semibold sm:font-bold  sm:leading-16 ">
+    <section className="py-10 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center px-1 sm:px-4">
+      <div className="max-w-2xl">
+        <h2 className="text-neutral-950 text-4xl sm:text-5xl xl:text-6xl font-semibold sm:font-bold leading-tight xl:leading-16">
           Secure Smarter. <br />
           Insights & Experts
         </h2>

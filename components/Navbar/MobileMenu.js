@@ -36,8 +36,8 @@ const MobileMenu = () => {
       onOpenChange={setIsOpen}
       noBodyStyles
     >
-      <DrawerTrigger>
-        <div className="sm:hidden hover:bg-slate-700/15 rounded-md cursor-pointer p-2">
+      <DrawerTrigger className="sm:hidden" aria-label="Open menu">
+        <div className="hover:bg-slate-700/15 rounded-md cursor-pointer p-2">
           <Menu11Icon size={20} strokeWidth={1.8} className="cursor-pointer" />
         </div>
       </DrawerTrigger>
