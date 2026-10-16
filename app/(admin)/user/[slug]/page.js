@@ -55,8 +55,10 @@ const UserPage = () => {
     slug,
     { skip: !slug },
   );
-  const [refreshAnalytics, { isLoading: isRefreshing }] =
-    useRefreshAdminAccountAnalyticsMutation();
+  const [
+    refreshAnalytics,
+    { isLoading: isRefreshing, isError: isRefreshError, error: refreshError },
+  ] = useRefreshAdminAccountAnalyticsMutation();
 
   const lastUpdated = data?.data?.lastUpdated;
 
@@ -115,8 +117,8 @@ const UserPage = () => {
   const handleRefresh = async () => {
     try {
       await refreshAnalytics(slug).unwrap();
-    } catch (refreshError) {
-      console.error("Refresh analytics failed:", refreshError);
+    } catch (caughtError) {
+      console.error("Refresh analytics failed:", caughtError);
     }
   };
 
@@ -223,6 +225,15 @@ const UserPage = () => {
               {isRefreshing ? "Refreshing..." : "Refresh now"}
             </button>
           </div>
+          {isRefreshError && (
+            <p className="mt-2 text-xs text-red-500 print:hidden">
+              Refresh failed:{" "}
+              {refreshError?.data?.message ||
+                (refreshError?.status === 504
+                  ? "The server timed out. Try again."
+                  : "Unknown error. Check the backend logs.")}
+            </p>
+          )}
           {/* platform tabs */}
           <div className="mt-3 print:hidden">
             <Tabs
