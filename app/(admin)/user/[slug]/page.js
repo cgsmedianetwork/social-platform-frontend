@@ -17,7 +17,7 @@ import {
 import { CloudDownload, LoaderIcon, RefreshCw } from "lucide-react";
 import moment from "moment";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 const platformTabs = [
@@ -114,19 +114,46 @@ const UserPage = () => {
     [visibleAccounts],
   );
 
-  const handleRefresh = async () => {
+  const handleRefresh = useCallback(async () => {
     try {
       await refreshAnalytics(slug).unwrap();
     } catch (caughtError) {
       console.error("Refresh analytics failed:", caughtError);
     }
-  };
+  }, [refreshAnalytics, slug]);
+
+  // The backend cron does not run on Vercel. When the user has connected
+  // accounts but no saved snapshot, fetch the analytics once on the first
+  // visit. The ref stops a loop if that fetch fails.
+  const autoRefreshedFor = useRef(null);
+  const hasNoSnapshot =
+    Boolean(data) && !lastUpdated && (data?.data?.accounts?.length || 0) > 0;
+
+  useEffect(() => {
+    if (
+      hasNoSnapshot &&
+      !isFetching &&
+      !isRefreshing &&
+      autoRefreshedFor.current !== slug
+    ) {
+      autoRefreshedFor.current = slug;
+      handleRefresh();
+    }
+  }, [hasNoSnapshot, isFetching, isRefreshing, slug, handleRefresh]);
 
   const handleDownload = () => {
     window.print();
   };
 
   const renderChart = () => {
+    if (isRefreshing && !lastUpdated) {
+      return (
+        <p className="py-20 text-center text-sm text-neutral-500 flex items-center justify-center gap-2">
+          <LoaderIcon className="size-4 animate-spin" /> Fetching analytics
+          from the connected accounts. This can take some seconds...
+        </p>
+      );
+    }
     if (isFetching) {
       return (
         <p className="py-20 text-center text-sm text-neutral-500">
