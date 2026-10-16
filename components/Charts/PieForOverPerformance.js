@@ -3,41 +3,40 @@
 import { Pie, PieChart } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
 
-const PieForOverPerformance = () => {
-  const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-  ];
-  const chartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    chrome: {
-      label: "Chrome",
-      color: "var(--chart-1)",
-    },
-    safari: {
-      label: "Safari",
-      color: "var(--chart-2)",
-    },
-    firefox: {
-      label: "Firefox",
-      color: "var(--chart-3)",
-    },
-    edge: {
-      label: "Edge",
-      color: "var(--chart-4)",
-    },
-    other: {
-      label: "Other",
-      color: "var(--chart-5)",
-    },
-  };
+// Shows the share of total followers for each connected account.
+const PieForOverPerformance = ({ accounts = [] }) => {
+  const chartData = accounts
+    .filter((account) => Number(account.followers) > 0)
+    .map((account) => ({
+      key: account.key,
+      followers: Number(account.followers),
+      fill: `var(--color-${account.key})`,
+    }));
+
+  const chartConfig = accounts.reduce(
+    (config, account) => ({
+      ...config,
+      [account.key]: { label: account.label, color: account.color },
+    }),
+    { followers: { label: "Followers" } },
+  );
+
+  const totalFollowers = chartData.reduce(
+    (total, item) => total + item.followers,
+    0,
+  );
+
+  if (chartData.length === 0) {
+    return (
+      <div className="w-full flex-1 flex items-center justify-center p-5 text-sm text-neutral-500 text-center">
+        No follower data yet. Refresh the analytics after the user connects an
+        account.
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full flex-1 ">
+    <div className="w-full flex-1 px-5 pb-4">
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
@@ -49,13 +48,35 @@ const PieForOverPerformance = () => {
           />
           <Pie
             data={chartData}
-            dataKey="visitors"
-            nameKey="browser"
+            dataKey="followers"
+            nameKey="key"
             innerRadius={40}
             outerRadius={100}
           />
         </PieChart>
       </ChartContainer>
+      <p className="text-center text-sm text-neutral-500">
+        Total followers:{" "}
+        <span className="font-semibold text-neutral-800">
+          {totalFollowers.toLocaleString()}
+        </span>
+      </p>
+      <ul className="mt-3 flex flex-col gap-1.5 text-xs">
+        {chartData.map((item) => (
+          <li key={item.key} className="flex items-center gap-2">
+            <span
+              className="size-2.5 rounded-sm shrink-0"
+              style={{ backgroundColor: chartConfig[item.key].color }}
+            />
+            <span className="flex-1 truncate text-neutral-600">
+              {chartConfig[item.key].label}
+            </span>
+            <span className="text-neutral-800">
+              {item.followers.toLocaleString()}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

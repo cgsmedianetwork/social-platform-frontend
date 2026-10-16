@@ -10,9 +10,9 @@ import logo from "../../Assets/logo.webp";
 const AdminLayout = ({ children }) => {
   return (
     <ReduxProvider>
-      <div className="w-full h-screen flex overflow-hidden">
+      <div className="w-full h-screen flex overflow-hidden print:h-auto print:overflow-visible">
         {/* sidebar */}
-        <aside className="hidden md:flex md:w-48 lg:w-64  flex-shrink-0  md:flex-col border-r border-gray-200">
+        <aside className="hidden md:flex md:w-48 lg:w-64  flex-shrink-0  md:flex-col border-r border-gray-200 print:!hidden">
           {/* Top: Logo */}
           <div className="p-4 px-6 ">
             <Link href="/">
@@ -42,8 +42,10 @@ const AdminLayout = ({ children }) => {
             <button className="w-full py-2 px-4 rounded text-sm">Logout</button>
           </div> */}
         </aside>
-        <main className="flex-1 overflow-y-auto flex flex-col w-full bg-[#F9FBFB]">
-          <AdminDashboardNavbar />
+        <main className="flex-1 overflow-y-auto flex flex-col w-full bg-[#F9FBFB] print:overflow-visible print:bg-white">
+          <div className="print:hidden">
+            <AdminDashboardNavbar />
+          </div>
           {children}
         </main>
       </div>
